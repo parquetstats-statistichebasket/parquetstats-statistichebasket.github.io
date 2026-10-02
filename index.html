@@ -342,6 +342,7 @@ const DATI = {
     ['2026-10-02','20:00',3,'Lyon-Villeurbanne',[33,28,16,15],'Valencia',[21,29,26,29]],
     ['2026-10-02','20:00',3,'Bayern',[27,20,18,19],'Partizan',[22,24,11,29]],
     ['2026-10-02','20:15',3,'Panathinaikos',[25,18,25,22],'Maccabi Tel Aviv',[10,14,19,24]],
+    ['2026-10-02','20:30',3,'Baskonia',[26,18,21,22],'Olimpia Milano',[16,20,24,16]],
   ],
   ESP: [
     // Giornata 1
@@ -857,7 +858,7 @@ function pLine(p,k,l){
 const pctF = v => v==null ? '<span class="muted">–</span>' : fmt1(v);
 const pmF = v => { const r=Math.round(v*10)/10; return `<span class="${r>0?'plus':r<0?'minus':''}">${r>0?'+':''}${fmt1(r)}</span>`; };
 const playerA = r => `<a class="tl" href="#/p/${r.lid}/${r.i}">${esc(r.name)}</a>`;
-const plCover = L => `<p class="hint" style="padding:8px 0 0;color:var(--orange-d);font-weight:600">${t('plCover')(L.boxN,L.matches.length)}</p>`;
+const plCover = L => '';  // avviso "Box score inseriti" rimosso su richiesta
 function avgCols(withTeam){
   const c=[rankCol(),{k:'name',label:t('player'),cls:'l',fmt:(v,r)=>playerA(r)}];
   if(withTeam) c.push({k:'teamName',label:t('team'),cls:'l',fmt:(v,r)=>`<a class="tl" href="#/t/${r.lid}/${r.team}">${esc(v)}</a>`});
