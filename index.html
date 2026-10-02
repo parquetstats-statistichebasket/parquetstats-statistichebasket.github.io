@@ -332,6 +332,16 @@ const DATI = {
     ['2026-09-29','20:45',2,'Paris',[18,22,23,16],'Partizan',[15,29,23,25]],
     ['2026-09-30','20:05',2,'Maccabi Tel Aviv',[19,27,17,30],'Besiktas',[27,25,26,31]],
     ['2026-09-30','20:15',2,'Panathinaikos',[25,31,24,22],'Lyon-Villeurbanne',[13,21,22,23]],
+    // Giornata 3
+    ['2026-10-01','18:00',3,'Hapoel Tel Aviv',[29,34,12,27],'Real Madrid',[20,23,32,23]],
+    ['2026-10-01','20:00',3,'Stella Rossa',[19,18,19,21],'Anadolu Efes',[21,15,17,19]],
+    ['2026-10-01','20:30',3,'Virtus Bologna',[33,16,26,21],'Olympiakos',[30,20,20,24]],
+    ['2026-10-01','20:45',3,'Paris',[17,24,20,21],'Zalgiris Kaunas',[19,19,15,25]],
+    ['2026-10-02','19:00',3,'Besiktas',[17,23,22,20],'Barcellona',[25,27,25,18]],
+    ['2026-10-02','19:45',3,'Fenerbahce',[26,16,13,21],'Dubai',[14,25,12,15]],
+    ['2026-10-02','20:00',3,'Lyon-Villeurbanne',[33,28,16,15],'Valencia',[21,29,26,29]],
+    ['2026-10-02','20:00',3,'Bayern',[27,20,18,19],'Partizan',[22,24,11,29]],
+    ['2026-10-02','20:15',3,'Panathinaikos',[25,18,25,22],'Maccabi Tel Aviv',[10,14,19,24]],
   ],
   ESP: [
     // Giornata 1
@@ -347,6 +357,197 @@ const DATI = {
   ],
 };
 
+/* ---------- BOX SCORE GIOCATORI ----------
+   Chiave: 'data|squadra di casa|squadra ospite' (nomi identici a quelli in DATI).
+   Riga: [giocatore, 'H' casa / 'A' ospite, punti, rimbalzi, assist, minuti,
+          tiri da 2 segnati, tiri da 2 tentati, tiri da 3 segnati, tiri da 3 tentati,
+          tiri liberi segnati, tiri liberi tentati, plus/minus]   (trattino = 0) */
+const BOX = {
+  ITA: {
+    '2026-09-27|Varese|Virtus Bologna': [
+      ['Alviti D.','H',14,4,3,24, 2,2, 3,3, 1,2, -4],
+      ['Hale H.','H',14,1,2,29, 2,12, 2,10, 4,5, -20],
+      ['Renfro N.','H',8,5,1,23, 4,5, 0,0, 0,0, -16],
+      ['Librizzi M.','H',7,2,2,18, 1,2, 1,6, 2,2, -12],
+      ['Duke Jr. D.','H',6,0,3,25, 2,6, 0,2, 2,3, -8],
+      ['Nikolic S.','H',6,1,2,26, 3,3, 0,0, 0,0, -14],
+      ['Ikangi I.','H',5,1,2,21, 1,2, 1,5, 0,0, -8],
+      ['Kamagate I.','H',5,6,1,11, 2,2, 0,0, 1,2, -7],
+      ['Roby I.','H',2,1,0,14, 1,2, 0,3, 0,0, -10],
+      ['Villa M.','H',2,2,1,7, 1,2, 0,1, 0,2, -9],
+      ['Kangur R.','H',0,0,0,1, 0,0, 0,0, 0,0, 2],
+      ['Ladurner M.','H',0,0,0,1, 0,0, 0,0, 0,0, 1],
+      ['Alston Jr. D.','A',17,5,2,21, 3,5, 2,6, 5,5, 12],
+      ['Baldasso T.','A',17,5,2,22, 4,5, 1,8, 6,7, 13],
+      ['Edwards K.','A',12,6,0,23, 3,3, 2,4, 0,0, 12],
+      ['Carr M.','A',11,4,6,21, 3,6, 1,2, 2,2, 10],
+      ['Frazier T.','A',7,0,5,22, 2,2, 1,3, 0,0, 13],
+      ['Klintman B.','A',7,5,1,21, 3,3, 0,2, 1,4, 8],
+      ['Hackett D.','A',6,6,3,20, 0,0, 1,2, 3,4, 7],
+      ['Ferrari F.','A',4,0,1,5, 2,3, 0,0, 0,1, -2],
+      ['Casarin D.','A',2,0,1,9, 0,1, 0,0, 2,2, 9],
+      ['Diarra A.','A',2,5,0,15, 0,1, 0,0, 2,2, -1],
+      ['Diouf M.','A',4,4,2,20, 2,3, 0,0, 0,0, 24],
+      ['Baiocchi M.','A',1,0,0,1, 0,0, 0,0, 1,2, -2],
+    ],
+    '2026-09-27|Maxima Roma|Basket Napoli': [
+      ['Bilan M.','H',18,11,1,26, 5,7, 0,0, 8,8, -13],
+      ['Alibegovic M.','H',15,4,2,30, 0,2, 1,3, 12,12, -3],
+      ['Holiday A.','H',10,4,6,28, 0,5, 2,6, 4,4, -17],
+      ['Brown J.','H',8,7,1,22, 2,3, 0,2, 4,4, -5],
+      ['Lemar B.','H',8,0,1,18, 0,4, 2,5, 2,2, -14],
+      ['Bonaccini F.','H',5,1,2,11, 1,1, 1,1, 0,0, 0],
+      ['Tyson H.','H',5,1,0,8, 1,2, 1,2, 0,0, -6],
+      ['Camara G.','H',4,0,0,11, 2,2, 0,0, 0,0, -2],
+      ['Ryan M.','H',2,0,0,13, 1,2, 0,2, 0,0, -15],
+      ['Veronesi G.','H',0,0,0,12, 0,1, 0,2, 0,0, -3],
+      ['Wheatle C.','H',0,1,0,21, 0,2, 0,1, 0,0, -17],
+      ['Dowtin J.','A',19,4,7,29, 6,7, 2,6, 1,1, 15],
+      ['Jakimovski A.','A',16,2,2,24, 2,6, 3,4, 3,4, 26],
+      ['Brown M.','A',14,5,1,22, 1,1, 4,6, 0,0, 9],
+      ['Caruso G.','A',12,6,0,17, 4,4, 1,1, 1,2, 11],
+      ['Petrucelli J.','A',11,0,3,23, 2,4, 1,2, 4,6, 2],
+      ['White J.','A',7,4,1,24, 2,4, 1,2, 0,0, -1],
+      ['Faggian L.','A',5,1,1,10, 1,2, 1,4, 0,0, -1],
+      ['Tarczewski K.','A',4,2,1,9, 2,2, 0,0, 0,0, 11],
+      ['Sankare A.','A',3,1,0,6, 0,1, 1,1, 0,0, 3],
+      ['Seljaas Z.','A',2,3,0,19, 1,2, 0,2, 0,0, 13],
+      ['Spissu M.','A',1,2,8,17, 0,0, 0,2, 1,1, 7],
+    ],
+    '2026-09-27|Udine|Scafati': [
+      ['Battle R.','H',18,5,2,29, 6,9, 2,5, 0,0, 31],
+      ['Valentine D.','H',17,6,2,28, 1,2, 5,9, 0,0, 20],
+      ['Bendzius E.','H',15,2,0,19, 0,3, 3,5, 6,6, 15],
+      ['Mcglynn N.','H',14,4,0,21, 5,7, 1,1, 1,1, 0],
+      ['Sisko Z. M.','H',9,6,9,26, 3,4, 1,2, 0,0, 21],
+      ['Calzavara A.','H',6,1,5,17, 3,5, 0,1, 0,0, 7],
+      ['Mobio J.','H',4,3,0,18, 2,2, 0,4, 0,0, 13],
+      ['Spencer','H',4,9,1,19, 2,2, 0,0, 0,0, 24],
+      ['Bucarelli L.','H',0,1,2,12, 0,2, 0,4, 0,0, 0],
+      ['Cavallero M.','H',0,3,1,11, 0,1, 0,1, 0,0, -11],
+      ['Nevels G.','A',12,2,1,32, 4,7, 1,4, 1,1, -17],
+      ['Offurum C.','A',12,3,1,30, 3,7, 2,3, 0,0, -13],
+      ['Onyema Z.','A',11,3,1,25, 5,7, 0,0, 1,2, -26],
+      ['Lever A.','A',8,6,2,23, 1,3, 2,5, 0,0, -11],
+      ['McGruder R.','A',7,2,1,24, 1,5, 1,4, 2,4, -17],
+      ['Moore C.','A',7,2,7,25, 3,6, 0,2, 1,2, -15],
+      ['Mascolo B.','A',4,5,2,23, 1,8, 0,2, 2,2, -19],
+      ['Iannuzzi A.','A',2,0,0,6, 1,1, 0,0, 0,0, 0],
+      ['Ceron M.','A',0,4,1,12, 0,0, 0,2, 0,0, -2],
+    ],
+    '2026-09-27|Tortona|Verona': [
+      ['Maddox D.','H',23,4,2,25, 5,5, 4,6, 1,3, 3],
+      ['Gorham J.','H',14,3,2,31, 6,6, 0,1, 2,2, 9],
+      ['Bortolani G.','H',13,1,0,18, 3,4, 2,4, 1,2, 1],
+      ['Hubb P.','H',13,1,8,26, 2,5, 2,5, 3,3, -1],
+      ['Olejniczak D.','H',11,5,1,24, 4,6, 0,0, 3,4, 7],
+      ['Alibegovic A.','H',10,2,1,19, 4,5, 0,1, 2,3, 3],
+      ['Durham A.','H',10,3,4,14, 3,3, 1,1, 1,1, 9],
+      ['Jallow K.','H',5,3,2,23, 2,4, 0,0, 1,1, 6],
+      ['Pecchia A.','H',2,2,1,18, 1,2, 0,0, 0,0, -2],
+      ['Gazzotti G.','H',0,0,0,2, 0,0, 0,0, 0,0, 5],
+      ['Tobey M.','A',19,11,4,29, 5,6, 3,5, 0,0, 2],
+      ['Massinburg C.','A',17,2,7,32, 5,9, 1,4, 4,6, -11],
+      ['Zampini F.','A',15,4,3,36, 6,9, 0,4, 3,3, -3],
+      ['Ambrosin L.','A',11,0,0,18, 1,3, 3,7, 0,0, -2],
+      ['Samuels J.','A',10,5,2,26, 3,7, 0,4, 4,6, -4],
+      ['Poser F.','A',9,5,0,21, 4,11, 0,0, 1,2, -9],
+      ['Loro A.','A',8,2,1,21, 1,2, 2,6, 0,0, -9],
+      ['Melendez R.','A',4,0,0,15, 2,3, 0,0, 0,0, 1],
+      ['Maodo M.','A',0,2,0,2, 0,0, 0,0, 0,0, -5],
+    ],
+    '2026-09-27|Olimpia Milano|Trieste': [
+      ['Burnell J.','H',20,10,3,26, 4,7, 3,6, 3,4, 9],
+      ['Wright M.','H',16,7,2,22, 6,13, 0,0, 4,4, 13],
+      ['Bolmaro L.','H',11,5,2,25, 4,5, 0,2, 3,4, 4],
+      ['Cole R.','H',11,0,1,24, 1,4, 3,4, 0,0, 4],
+      ['Thompson D.','H',9,3,1,18, 1,3, 1,2, 4,4, 1],
+      ['Hall D.','H',7,3,2,26, 1,3, 1,4, 2,2, 12],
+      ['Diop O.','H',5,5,3,13, 2,6, 0,0, 1,2, -4],
+      ['Flaccadori D.','H',2,0,0,11, 1,4, 0,0, 0,2, -7],
+      ['Ricci G.','H',2,6,0,14, 1,1, 0,2, 0,0, -4],
+      ['Akele N.','H',0,0,0,5, 0,0, 0,0, 0,0, -5],
+      ['Tonut S.','H',0,7,3,16, 0,1, 0,1, 0,0, -3],
+      ['Ross C.','A',17,1,7,27, 1,4, 4,5, 3,4, 14],
+      ['Galloway L.','A',14,6,1,30, 3,11, 2,8, 2,2, -6],
+      ['Candussi F.','A',13,6,0,31, 3,4, 1,4, 4,4, -5],
+      ['Jones L.','A',10,3,0,19, 2,4, 2,5, 0,0, 13],
+      ['Deangeli L.','A',8,2,2,34, 1,2, 2,5, 0,0, -13],
+      ['Ruzzier M.','A',8,2,2,21, 0,0, 1,4, 5,6, -9],
+      ['McDermott S.','A',7,7,0,32, 2,4, 1,5, 0,1, -6],
+      ['Canka A.','A',2,1,0,4, 1,1, 0,0, 0,1, -1],
+      ['Paiano D.','A',0,0,0,2, 0,0, 0,0, 0,0, -7],
+    ],
+    '2026-09-26|Reggiana|Trento': [
+      ['Barford J.','H',22,6,2,32, 3,9, 4,11, 4,6, -5],
+      ['Rossato R.','H',16,3,2,26, 2,5, 4,7, 0,0, -6],
+      ['Severini L.','H',10,1,2,25, 2,3, 2,4, 0,0, 6],
+      ['Thor J.','H',10,4,2,26, 3,5, 1,5, 1,2, -3],
+      ['Smith K.','H',5,3,6,25, 0,1, 1,6, 2,2, -1],
+      ['Echenique J.','H',4,3,1,15, 2,2, 0,0, 0,2, -5],
+      ['Edwards R.','H',4,1,1,18, 1,3, 0,1, 2,2, -2],
+      ['Visconti R.','H',3,0,0,7, 0,1, 1,1, 0,0, -5],
+      ['Ogbeide D.','H',2,6,1,11, 1,1, 0,0, 0,0, -6],
+      ['Uglietti L.','H',2,2,3,15, 1,2, 0,1, 0,0, 2],
+      ['Olivari Q.','A',23,7,2,29, 3,6, 5,12, 2,2, 5],
+      ['Bigelow I.','A',13,7,1,21, 0,1, 1,4, 10,12, 5],
+      ['Bayehe J.','A',11,3,1,29, 3,4, 1,3, 2,2, 2],
+      ['Brown C.','A',9,6,5,25, 1,1, 1,6, 4,5, 8],
+      ['Brown D.','A',9,3,4,27, 2,5, 1,4, 2,2, 12],
+      ['Bertini A.','A',7,5,1,17, 2,2, 1,3, 0,0, -4],
+      ['Mawugbe S.','A',4,3,0,23, 1,2, 0,0, 2,2, 9],
+      ['Medina Bouza J.','A',4,0,0,7, 0,0, 1,2, 1,2, -6],
+      ['Cheickh Niang','A',3,1,0,15, 0,1, 1,4, 0,0, -1],
+      ['Forray A.','A',0,0,2,7, 0,0, 0,0, 0,0, -5],
+    ],
+    '2026-09-26|Venezia|Cantù': [
+      ['Wiltjer K.','H',16,4,4,27, 6,11, 1,5, 1,1, 20],
+      ['Candi L.','H',14,2,1,25, 1,1, 4,6, 0,0, 15],
+      ['Tessitori A.','H',12,5,4,20, 5,5, 0,0, 2,2, 20],
+      ['Watson G.','H',11,2,6,24, 3,4, 1,4, 2,3, 12],
+      ['Green E.','H',10,1,1,14, 2,2, 2,4, 0,0, 15],
+      ['Boakye E.','H',7,9,0,20, 3,7, 0,0, 1,2, -8],
+      ['Grant S.','H',5,3,1,13, 1,3, 1,2, 0,0, -8],
+      ['Bowman K.','H',4,4,1,25, 2,4, 0,2, 0,0, -9],
+      ['Maretto O.','H',3,2,0,9, 1,1, 0,1, 1,2, -9],
+      ['Parks J.','H',3,5,2,23, 1,2, 0,1, 1,3, 12],
+      ['Brown C.','A',13,4,0,18, 5,7, 0,0, 3,4, -18],
+      ['Christon S.','A',11,2,2,23, 5,9, 0,1, 1,2, -13],
+      ['Moretti D.','A',11,2,3,20, 0,2, 3,5, 2,2, 3],
+      ['Gravett H.','A',10,2,1,19, 2,4, 1,4, 3,3, -19],
+      ['Grazulis A.','A',8,3,2,23, 1,5, 2,3, 0,0, 3],
+      ['Moraschini R.','A',8,5,1,19, 1,4, 2,3, 0,0, 5],
+      ['Flagg S.','A',7,2,4,28, 2,5, 1,4, 0,0, 0],
+      ['Ventura S.','A',5,1,0,8, 1,2, 1,1, 0,0, 5],
+      ['Miles I.','A',0,2,1,18, 0,1, 0,2, 0,0, -20],
+      ['Okeke L.','A',0,2,0,5, 0,1, 0,0, 0,0, -1],
+      ['Udom L.','A',0,3,2,19, 0,3, 0,0, 0,0, -5],
+    ],
+    '2026-09-26|Treviso|BC Roma': [
+      ['Macura J. P.','H',31,4,1,31, 8,10, 2,6, 9,11, 20],
+      ['Russell D.','H',20,1,7,28, 6,10, 2,5, 2,2, 13],
+      ['Cappelletti A.','H',15,5,9,24, 4,8, 1,2, 4,4, 8],
+      ['Chery V.','H',15,4,0,19, 7,8, 0,0, 1,1, 7],
+      ['Anigbogu I.','H',13,4,0,20, 4,5, 0,0, 5,7, 10],
+      ['Chapman B.','H',6,2,3,28, 1,2, 0,3, 4,10, 16],
+      ['Chillo M.','H',6,3,0,13, 0,1, 2,3, 0,0, -5],
+      ['Carter C.','H',3,3,3,24, 0,1, 1,1, 0,0, 2],
+      ['Allinei G.','H',0,0,0,6, 0,0, 0,1, 0,0, 6],
+      ['Miaschi F.','H',0,0,0,7, 0,1, 0,2, 0,0, -2],
+      ['Simonovic M.','A',20,8,0,25, 8,10, 1,2, 1,2, -10],
+      ['Ayayi G.','A',17,6,4,31, 6,8, 1,2, 2,2, -12],
+      ['Watson P.','A',13,1,1,16, 1,1, 3,6, 2,7, 0],
+      ['Strautins A.','A',12,6,2,26, 2,6, 2,6, 2,2, -8],
+      ['Mannion N.','A',11,3,7,28, 1,3, 2,8, 3,4, -24],
+      ['Stevenson E.','A',11,2,3,24, 1,2, 3,7, 0,0, 1],
+      ['Davis C.','A',8,2,4,24, 3,4, 0,4, 2,2, -2],
+      ['Flowers T.','A',2,1,1,5, 0,0, 0,1, 2,2, 3],
+      ['Emejuru G.','A',0,3,0,11, 0,1, 0,0, 0,0, -8],
+      ['Mezzanotte A.','A',0,1,0,9, 0,0, 0,0, 0,0, -12],
+    ],
+  },
+};
+
 const LEAGUES = [
   { id:'ITA', code:'LBA', name:{it:'Serie A',en:'Serie A'},       full:'LBA Serie A', country:{it:'Italia',en:'Italy'},  po:8,        poNote:{it:'1-8: playoff',en:'1-8: playoffs'} },
   { id:'EUR', code:'EL',  name:{it:'EuroLeague',en:'EuroLeague'}, full:'EuroLeague',  country:{it:'Europa',en:'Europe'}, po:6, pi:10, poNote:{it:'1-6 playoff · 7-10 play-in',en:'1-6 playoffs · 7-10 play-in'} },
@@ -360,7 +561,7 @@ const PRIVACY = {
   logDays: '',            // giorni di conservazione dei log; vuoto = "per il periodo stabilito dal fornitore"
   usaTransfer: true,      // true se il fornitore è negli USA (GitHub, Netlify, Cloudflare…); false per hosting UE (es. Hostinger)
   hostPolicy: 'https://docs.github.com/it/site-policy/privacy-policies/github-general-privacy-statement', // informativa del fornitore
-  updated: '2026-10-01',  // data ultimo aggiornamento dell'informativa
+  updated: '2026-10-02',  // data ultimo aggiornamento dell'informativa
 };
 
 /* Nomi squadra mostrati in inglese quando diversi dall'italiano */
@@ -375,7 +576,7 @@ let LANG = (()=>{
 
 const T = {
   it:{
-    search:'Cerca squadra…', home:'Home', stats:'Statistiche', analysis:'Analisi partita', leagues:'Campionati', betStats:'Statistiche scommesse',
+    search:'Cerca squadra o giocatore…', home:'Home', stats:'Statistiche', analysis:'Analisi partita', leagues:'Campionati', betStats:'Statistiche scommesse',
     resp:'Il gioco può causare dipendenza patologica ed è vietato ai minori. Gioca responsabilmente.',
     footer:'<strong>Il gioco può causare dipendenza patologica ed è vietato ai minori di 18 anni.</strong> Gioca responsabilmente. ParquetStats fornisce statistiche a solo scopo informativo e non raccoglie scommesse. Risultati inseriti manualmente: verifica sempre i dati prima di giocare.',
     terms:'Termini e condizioni', contacts:'Contatti',
@@ -397,7 +598,7 @@ const T = {
     bWins:'Vittorie', bWinsS:'12 testa a testa, suppl. inclusi', bOver:'Over somma punti', bLineS:'Linea media del campionato', bEven:'Somma pari', bEvenS:'Pari/Dispari',
     bOver1:'Over 1° tempo', bOT:'Supplementari', bOTS:'Partite finite all\'overtime', bStreak:'Serie vittorie in corso', bStreakS:'Partite vinte consecutivamente', streak:'Serie',
     statsOf:x=>`Statistiche ${x}`, relNote:' Poiché i punteggi medi cambiano molto tra campionati, la linea è relativa alla media di ciascun campionato.', league:'Campionato', allL:'Tutti',
-    tabs:{stats:'Statistiche',partite:'Partite',classifica:'Classifica',analisi:'Analisi partita'},
+    tabs:{stats:'Statistiche',partite:'Partite',classifica:'Classifica',analisi:'Analisi partita',giocatori:'Giocatori'},
     kAvg:'Media punti', kAvg1:'Media 1° tempo', kHome:'Vince in casa', kOT2:'Supplementari', kEven2:'Somma pari',
     headMeta:(c,f,nt,ng)=>`${c} · ${f} · ${nt} squadre · ${ng} partite`,
     date:'Data', time:'Ora', match:'Partita', ht:'1°T', quarters:'Quarti', final:'Finale', tot:'Tot', pd:'P/D', prev:'Precedente', next:'Successiva',
@@ -418,11 +619,19 @@ const T = {
     freqPct:'Frequenza %', trend:'Andamento', total:'Totale', drought:'Ritardo', droughtT:'Partite consecutive senza l\'esito', streakT:'Serie in corso', maxStreak:'Max serie', maxStreakT:'Serie massima',
     last10g:'Ultime 10 partite', rd:'Gior.', opp:'Avversario', res:'Ris.', resultCol:'Esito',
     title:'ParquetStats – Statistiche basket per le scommesse',
+    players:'Giocatori', player:'Giocatore', allTeams:'Tutte le squadre', stat:'Statistica', avgCol:'Media',
+    plOU:'Over/Under giocatori', plOUdesc:'Quante volte ogni giocatore ha superato (Over) o non raggiunto (Under) la linea scelta. Le linee sono soglie fisse scelte da ParquetStats, non quote.',
+    plLeaders:'Medie per partita', plCover:(a,b)=>`Box score inseriti: ${a} ${a===1?'partita':'partite'} su ${b}. Le statistiche dei giocatori si riferiscono solo a queste partite.`,
+    plNone:'Statistiche dei giocatori non ancora disponibili per questo campionato.',
+    cMin:'MIN', cMinT:'Minuti per partita', cPts:'PNT', cPtsT:'Punti per partita', cReb:'RT', cRebT:'Rimbalzi per partita', cAst:'AST', cAstT:'Assist per partita', cPra:'P+R+A', cPraT:'Punti + rimbalzi + assist',
+    c2:'2P%', c2T:'Percentuale tiri da 2', c3:'3P%', c3T:'Percentuale tiri da 3', cFt:'TL%', cFtT:'Percentuale tiri liberi', cPm:'+/−', cPmT:'Plus/minus medio',
+    serO:'Serie O', serOT:'Partite consecutive in Over (in corso)', serU:'Serie U', serUT:'Partite consecutive in Under (in corso)',
+    gameLog:'Partite del giocatore', plAll:'Tutte le linee', plTeam:'Giocatori', s2:'Tiri da 2', s3:'Tiri da 3', sFt:'Tiri liberi',
     privacyTitle:'Informativa sulla privacy', privacySub:'Informativa ai sensi dell\'art. 13 del Regolamento UE 2016/679 (GDPR).',
     privacyTodo:'<b>Da completare prima della pubblicazione:</b> inserisci il nome del titolare nell\'oggetto <code>PRIVACY</code> in cima al codice. I campi evidenziati spariranno da soli.',
   },
   en:{
-    search:'Search team…', home:'Home', stats:'Statistics', analysis:'Match analysis', leagues:'Leagues', betStats:'Betting statistics',
+    search:'Search team or player…', home:'Home', stats:'Statistics', analysis:'Match analysis', leagues:'Leagues', betStats:'Betting statistics',
     resp:'Gambling can be addictive and is forbidden to minors. Play responsibly.',
     footer:'<strong>Gambling can be addictive and is forbidden to anyone under 18.</strong> Play responsibly. ParquetStats provides statistics for information only and does not accept bets. Results are entered manually: always double-check the data before betting.',
     terms:'Terms & conditions', contacts:'Contact',
@@ -444,7 +653,7 @@ const T = {
     bWins:'Wins', bWinsS:'Moneyline, overtime included', bOver:'Over total points', bLineS:'League average line', bEven:'Even total', bEvenS:'Odd/Even',
     bOver1:'Over 1st half', bOT:'Overtime', bOTS:'Games that went to overtime', bStreak:'Current winning streaks', bStreakS:'Consecutive wins', streak:'Streak',
     statsOf:x=>`${x} statistics`, relNote:' Since average scores vary a lot between leagues, the line is relative to each league\'s average.', league:'League', allL:'All',
-    tabs:{stats:'Statistics',partite:'Games',classifica:'Standings',analisi:'Match analysis'},
+    tabs:{stats:'Statistics',partite:'Games',classifica:'Standings',analisi:'Match analysis',giocatori:'Players'},
     kAvg:'Avg points', kAvg1:'Avg 1st half', kHome:'Home wins', kOT2:'Overtime', kEven2:'Even total',
     headMeta:(c,f,nt,ng)=>`${c} · ${f} · ${nt} teams · ${ng} games`,
     date:'Date', time:'Time', match:'Game', ht:'HT', quarters:'Quarters', final:'Final', tot:'Tot', pd:'E/O', prev:'Previous', next:'Next',
@@ -465,6 +674,14 @@ const T = {
     freqPct:'Frequency %', trend:'Trend', total:'Overall', drought:'Drought', droughtT:'Consecutive games without the outcome', streakT:'Current streak', maxStreak:'Max streak', maxStreakT:'Longest streak',
     last10g:'Last 10 games', rd:'Rd', opp:'Opponent', res:'Score', resultCol:'Result',
     title:'ParquetStats – Basketball betting statistics',
+    players:'Players', player:'Player', allTeams:'All teams', stat:'Stat', avgCol:'Avg',
+    plOU:'Player over/under', plOUdesc:'How often each player went over or stayed under the selected line. Lines are fixed thresholds chosen by ParquetStats, not odds.',
+    plLeaders:'Per-game averages', plCover:(a,b)=>`Box scores entered: ${a} of ${b} ${b===1?'game':'games'}. Player statistics refer only to these games.`,
+    plNone:'Player statistics are not yet available for this league.',
+    cMin:'MIN', cMinT:'Minutes per game', cPts:'PTS', cPtsT:'Points per game', cReb:'REB', cRebT:'Rebounds per game', cAst:'AST', cAstT:'Assists per game', cPra:'P+R+A', cPraT:'Points + rebounds + assists',
+    c2:'2P%', c2T:'2-point percentage', c3:'3P%', c3T:'3-point percentage', cFt:'FT%', cFtT:'Free-throw percentage', cPm:'+/−', cPmT:'Average plus/minus',
+    serO:'O streak', serOT:'Consecutive games over (current)', serU:'U streak', serUT:'Consecutive games under (current)',
+    gameLog:'Game log', plAll:'All lines', plTeam:'Players', s2:'2-pt shots', s3:'3-pt shots', sFt:'Free throws',
     privacyTitle:'Privacy policy', privacySub:'Information pursuant to Article 13 of EU Regulation 2016/679 (GDPR).',
     privacyTodo:'<b>To complete before publishing:</b> fill in the controller\'s name in the <code>PRIVACY</code> object at the top of the code. Highlighted fields will then disappear.',
   }
@@ -514,7 +731,7 @@ const LINE_AVG = { tot:'avgTot', half:'avg1t', team:'avgTeam' };
 const VIEWS = ['freq','rit','ser'];
 const VENUES = ['tot','home','away'];
 
-const ui = { venue:'tot', view:'freq', gl:'all', k:{tot:3,half:2,team:2}, range:{}, round:{}, sorts:{} };
+const ui = { venue:'tot', view:'freq', gl:'all', k:{tot:3,half:2,team:2}, range:{}, round:{}, sorts:{}, pstat:'pts', pline:{pts:1,reb:1,ast:1,pra:1}, pteam:{} };
 
 /* ---------- UTILITIES ---------- */
 const $ = (s,el=document) => el.querySelector(s);
@@ -556,7 +773,23 @@ function finalize(L){
   L.matches.forEach(g=>{ L.byTeam[g.h].push({g,H:true}); L.byTeam[g.a].push({g,H:false}); });
   L.avgTot=avg(L.matches.map(g=>g.hp+g.ap)); L.avg1t=avg(L.matches.map(g=>g.h1h+g.h1a)); L.avgTeam=L.avgTot/2;
 }
-LEAGUES.forEach(L=>{ load(L); finalize(L); });
+function loadBox(L){
+  const B=BOX[L.id]||{}, map=new Map(); L.boxN=0;
+  Object.entries(B).forEach(([key,rows])=>{
+    const [date,h,a]=key.split('|'), hi=L.teams.indexOf(h), ai=L.teams.indexOf(a);
+    const g=L.matches.find(m=>m.date===date&&m.h===hi&&m.a===ai);
+    if(!g){ console.warn('Box score senza partita corrispondente:',key); return; }
+    g.box=true; L.boxN++;
+    rows.forEach(([name,side,pts,reb,ast,min,t2m,t2a,t3m,t3a,ftm,fta,pm])=>{
+      const H=side==='H', team=H?hi:ai, id=name+'|'+team;
+      if(!map.has(id)) map.set(id,{name,team,games:[]});
+      map.get(id).games.push({g,H,pts,reb,ast,min,t2m,t2a,t3m,t3a,ftm,fta,pm,pra:pts+reb+ast});
+    });
+  });
+  L.players=[...map.values()].sort((x,y)=>x.name.localeCompare(y.name,'it'));
+  L.players.forEach((p,i)=>{ p.i=i; p.games.sort((x,y)=>x.g.r-y.g.r||(x.g.date+x.g.time).localeCompare(y.g.date+y.g.time)); });
+}
+LEAGUES.forEach(L=>{ load(L); finalize(L); loadBox(L); });
 const LG=Object.fromEntries(LEAGUES.map(L=>[L.id,L]));
 const LAST=LEAGUES.flatMap(L=>L.matches.map(g=>g.date)).sort().pop();
 const TN=(L,i)=>tn(L.teams[i]);
@@ -601,6 +834,95 @@ function standings(L){
   });
   rows.sort((a,b)=>b.wp-a.wp||b.df-a.df); rows.forEach((r,i)=>r.pos=i+1);
   return rows;
+}
+
+/* ---------- STATISTICHE GIOCATORI ---------- */
+const PSTAT = {
+  pts:{it:'Punti',en:'Points',lines:[5.5,10.5,15.5,20.5]},
+  reb:{it:'Rimbalzi',en:'Rebounds',lines:[2.5,4.5,6.5,8.5]},
+  ast:{it:'Assist',en:'Assists',lines:[1.5,3.5,5.5]},
+  pra:{it:'Punti+Rimbalzi+Assist',en:'Pts+Reb+Ast',lines:[10.5,15.5,20.5,25.5]},
+};
+function pAgg(L,p){
+  const gs=p.games, n=gs.length, s=k=>sum(gs.map(x=>x[k])), pc=(m,a)=>{ const A=s(a); return A?s(m)/A*100:null; };
+  return { name:p.name, lid:L.id, i:p.i, team:p.team, teamName:TN(L,p.team), g:n,
+    min:s('min')/n, pts:s('pts')/n, reb:s('reb')/n, ast:s('ast')/n, pra:s('pra')/n,
+    p2:pc('t2m','t2a'), p3:pc('t3m','t3a'), ft:pc('ftm','fta'), pm:s('pm')/n };
+}
+function pLine(p,k,l){
+  const v=p.games.map(x=>x[k]), on=v.filter(x=>x>l).length, n=v.length;
+  let so=0, su=0; for(let i=n-1;i>=0&&v[i]>l;i--) so++; for(let i=n-1;i>=0&&v[i]<l;i--) su++;
+  return { on, op:n?on/n*100:0, un:n-on, up:n?(n-on)/n*100:0, so, su };
+}
+const pctF = v => v==null ? '<span class="muted">–</span>' : fmt1(v);
+const pmF = v => { const r=Math.round(v*10)/10; return `<span class="${r>0?'plus':r<0?'minus':''}">${r>0?'+':''}${fmt1(r)}</span>`; };
+const playerA = r => `<a class="tl" href="#/p/${r.lid}/${r.i}">${esc(r.name)}</a>`;
+const plCover = L => `<p class="hint" style="padding:8px 0 0;color:var(--orange-d);font-weight:600">${t('plCover')(L.boxN,L.matches.length)}</p>`;
+function avgCols(withTeam){
+  const c=[rankCol(),{k:'name',label:t('player'),cls:'l',fmt:(v,r)=>playerA(r)}];
+  if(withTeam) c.push({k:'teamName',label:t('team'),cls:'l',fmt:(v,r)=>`<a class="tl" href="#/t/${r.lid}/${r.team}">${esc(v)}</a>`});
+  c.push({k:'g',label:t('gp'),title:t('gpT')},{k:'min',label:t('cMin'),title:t('cMinT'),fmt:fmt1},
+    {k:'pts',label:t('cPts'),title:t('cPtsT'),fmt:fmt1,heat:1,heatMax:25},{k:'reb',label:t('cReb'),title:t('cRebT'),fmt:fmt1},{k:'ast',label:t('cAst'),title:t('cAstT'),fmt:fmt1},
+    {k:'pra',label:t('cPra'),title:t('cPraT'),fmt:fmt1},{k:'p2',label:t('c2'),title:t('c2T'),fmt:pctF},{k:'p3',label:t('c3'),title:t('c3T'),fmt:pctF},
+    {k:'ft',label:t('cFt'),title:t('cFtT'),fmt:pctF},{k:'pm',label:t('cPm'),title:t('cPmT'),fmt:pmF});
+  return c;
+}
+
+function viewPlayers(L){
+  if(!L.players.length) return `<section class="card"><div class="pad"><h2 class="sec">${t('players')}</h2><p class="desc">${t('plNone')}</p></div></section>`;
+  const tf=ui.pteam[L.id]??'all', k=ui.pstat, st=PSTAT[k], li=Math.min(ui.pline[k],st.lines.length-1), l=st.lines[li];
+  const ps=L.players.filter(p=>tf==='all'||p.team===+tf);
+  const teams=[...new Set(L.players.map(p=>p.team))].map(i=>[i,TN(L,i)]).sort((x,y)=>x[1].localeCompare(y[1],LANG));
+  const teamSel=`<div class="ctl"><span class="ctl-l">${t('team')}</span><select data-chg="pteam" data-l="${L.id}"><option value="all">${t('allTeams')}</option>${teams.map(([i,n])=>`<option value="${i}"${String(i)===String(tf)?' selected':''}>${esc(n)}</option>`).join('')}</select></div>`;
+  const statPills=`<div class="ctl"><span class="ctl-l">${t('stat')}</span><div class="pills">${Object.keys(PSTAT).map(s=>`<button class="pill ${s===k?'on':''}" data-ui="pstat" data-val="${s}">${PSTAT[s][LANG]}</button>`).join('')}</div></div>`;
+  const linePills=`<div class="ctl"><span class="ctl-l">${t('line')}</span><div class="pills">${st.lines.map((x,i)=>`<button class="pill ${i===li?'on':''}" data-ui="pline.${k}" data-val="${i}">${fmtLine(x)}</button>`).join('')}</div></div>`;
+  const ouRows=ps.map(p=>Object.assign(pAgg(L,p),{avg:avg(p.games.map(x=>x[k]))},pLine(p,k,l)));
+  const gO=`Over ${fmtLine(l)}`, gU=`Under ${fmtLine(l)}`;
+  const ouCols=[rankCol(),{k:'name',label:t('player'),cls:'l',fmt:(v,r)=>playerA(r)},{k:'teamName',label:t('team'),cls:'l',fmt:(v,r)=>`<a class="tl" href="#/t/${r.lid}/${r.team}">${esc(v)}</a>`},
+    {k:'g',label:t('gp'),title:t('gpT')},{k:'avg',label:t('avgCol'),fmt:fmt1},
+    {k:'on',label:'N',group:gO,title:t('nT')},{k:'op',label:'%',group:gO,heat:1,fmt:fmt1},
+    {k:'un',label:'N',group:gU,title:t('nT')},{k:'up',label:'%',group:gU,heat:1,fmt:fmt1},
+    {k:'so',label:t('serO'),title:t('serOT'),group:t('streak')},{k:'su',label:t('serU'),title:t('serUT'),group:t('streak')}];
+  const avRows=ps.map(p=>pAgg(L,p));
+  return `<section class="card">
+    <div class="pad"><h2 class="sec">${t('plOU')} · ${st[LANG]} ${fmtLine(l)}</h2><p class="desc">${t('plOUdesc')}</p>${plCover(L)}</div>
+    <div class="ctls">${statPills}${linePills}${teamSel}</div>
+    <div style="padding-top:10px">${tableHTML(`pou-${L.id}-${k}`,ouCols,ouRows,{sort:{k:'op',dir:'desc'}})}</div>
+  </section>
+  <section class="card">
+    <div class="card-h"><h2 class="sec">${t('plLeaders')}</h2></div>
+    ${tableHTML('pavg-'+L.id,avgCols(true),avRows,{sort:{k:'pts',dir:'desc'}})}
+  </section>`;
+}
+
+function viewPlayer(L,pi){
+  const p=L.players[pi], a=pAgg(L,p);
+  const kp=[[t('gpT'),a.g],[t('cMinT'),fmt1(a.min)],[t('cPtsT'),fmt1(a.pts)],[t('cRebT'),fmt1(a.reb)],[t('cAstT'),fmt1(a.ast)],[t('c3T'),a.p3==null?'–':fmt1(a.p3)+'%']];
+  const ou=Object.entries(PSTAT).map(([k,st])=>st.lines.map((l,i)=>{ const r=pLine(p,k,l);
+    return `<tr>${i===0?`<td class="l" rowspan="${st.lines.length}" style="font-weight:700;background:#FFF8EE">${st[LANG]}</td>`:''}<td>${fmtLine(l)}</td>
+      <td>${r.on}</td><td ${heat(r.op)}>${fmt1(r.op)}</td><td>${r.un}</td><td ${heat(r.up)}>${fmt1(r.up)}</td><td>${r.so}</td><td>${r.su}</td></tr>`; }).join('')).join('');
+  const sh=(m,at)=>at?`${m}/${at}`:'–';
+  const log=p.games.slice().reverse().map(x=>{ const g=x.g, o=x.H?g.hp:g.ap, y=x.H?g.ap:g.hp, opp=x.H?g.a:g.h;
+    return `<tr><td>${fmtDate(g.date)}</td><td>${g.r}</td><td class="l">${x.H?'vs':'@'} ${teamA(L,opp)}</td>
+      <td class="fin">${o}-${y}${g.ot.length?'<span class="otb">OT</span>':''}</td><td>${x.min}</td><td><b>${x.pts}</b></td><td>${x.reb}</td><td>${x.ast}</td><td>${x.pra}</td>
+      <td>${sh(x.t2m,x.t2a)}</td><td>${sh(x.t3m,x.t3a)}</td><td>${sh(x.ftm,x.fta)}</td><td>${fmtSign(x.pm)}</td></tr>`; }).join('');
+  return `${banner()}
+  <section class="card">
+    <div class="pad" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">${flag(L.id,'lg')}
+      <div style="flex:1;min-width:200px"><h1 class="page">${esc(p.name)}</h1><div class="muted">${teamA(L,p.team)} · <a class="tl" href="#/l/${L.id}/giocatori">${ln(L)} ${SEASON}</a></div></div></div>
+    <div class="pad" style="padding-top:0">${kpiGrid(kp)}${plCover(L)}</div>
+  </section>
+  <section class="card">
+    <div class="card-h"><h2 class="sec">${t('plAll')}</h2></div>
+    <div class="tw"><table class="st"><thead>
+      <tr class="g"><th colspan="2" class="blank"></th><th colspan="2">Over</th><th colspan="2">Under</th><th colspan="2">${t('streak')}</th></tr>
+      <tr><th class="l">${t('stat')}</th><th>${t('line')}</th><th title="${t('nT')}">N</th><th>%</th><th title="${t('nT')}">N</th><th>%</th><th title="${t('serOT')}">${t('serO')}</th><th title="${t('serUT')}">${t('serU')}</th></tr></thead>
+      <tbody>${ou}</tbody></table></div>
+  </section>
+  <section class="card">
+    <div class="card-h"><h2 class="sec">${t('gameLog')}</h2></div>
+    <div class="tw"><table class="st"><thead><tr><th>${t('date')}</th><th>${t('rd')}</th><th class="l">${t('opp')}</th><th>${t('res')}</th><th title="${t('cMinT')}">${t('cMin')}</th><th>${t('cPts')}</th><th>${t('cReb')}</th><th>${t('cAst')}</th><th>${t('cPra')}</th><th title="${t('s2')}">2P</th><th title="${t('s3')}">3P</th><th title="${t('sFt')}">${t('cFt').replace('%','')}</th><th>+/−</th></tr></thead><tbody>${log}</tbody></table></div>
+  </section>`;
 }
 
 /* ---------- COMPONENTI ---------- */
@@ -880,6 +1202,7 @@ function viewTeam(L,ti){
       <td class="fin">${o}-${x}${g.ot.length?'<span class="otb">OT</span>':''}</td><td><span class="f ${w?'w':'l'}">${w?t('W'):t('L')}</span></td>
       <td>${H?g.h1h:g.h1a}-${H?g.h1a:g.h1h}</td><td>${tot}</td><td>${pdBadge(tot)}</td><td>${ouBadge(tot,cl)}</td></tr>`;
   }).join('');
+  const roster=L.players.filter(p=>p.team===ti).map(p=>pAgg(L,p));
   return `${banner()}
   <section class="card">
     <div class="pad" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">${flag(L.id,'lg')}
@@ -896,6 +1219,11 @@ function viewTeam(L,ti){
       <tr><th class="l">${t('market')}</th><th class="l">${t('outcome')}</th><th>${t('total')}</th><th>${t('homeC')}</th><th>${t('awayC')}</th><th title="${t('droughtT')}">${t('drought')}</th><th title="${t('streakT')}">${t('streak')}</th><th title="${t('maxStreakT')}">${t('maxStreak')}</th></tr></thead>
       <tbody>${body}</tbody></table></div>
   </section>
+  ${roster.length?`<section class="card">
+    <div class="card-h"><h2 class="sec">${t('plTeam')}</h2></div>
+    <div class="pad" style="padding-top:0">${plCover(L)}</div>
+    ${tableHTML('troster-'+L.id,avgCols(false),roster,{sort:{k:'pts',dir:'desc'}})}
+  </section>`:''}
   <section class="card">
     <div class="card-h"><h2 class="sec">${t('last10g')}</h2></div>
     <div class="tw"><table class="st"><thead><tr><th>${t('date')}</th><th>${t('rd')}</th><th class="l">${t('opp')}</th><th>${t('res')}</th><th>${t('resultCol')}</th><th>${t('ht')}</th><th>${t('tot')}</th><th>${t('pd')}</th><th>O/U</th></tr></thead><tbody>${last}</tbody></table></div>
@@ -914,15 +1242,15 @@ function viewPrivacy(){
   const usaIT=PRIVACY.usaTransfer?' Poiché il fornitore ha sede negli Stati Uniti, i dati di navigazione possono essere trasferiti fuori dall\'Unione europea; il trasferimento avviene sulla base dell\'EU-U.S. Data Privacy Framework, a cui il fornitore aderisce (art. 45 GDPR).':'';
   const usaEN=PRIVACY.usaTransfer?' As the provider is based in the United States, browsing data may be transferred outside the European Union; the transfer relies on the EU-U.S. Data Privacy Framework, to which the provider is certified (Art. 45 GDPR).':'';
   const upd=fmtDate(PRIVACY.updated);
-  const missing=!(PRIVACY.owner&&PRIVACY.email&&PRIVACY.hosting);
+  const missing=!(PRIVACY.email&&PRIVACY.hosting);
   const IT=`
-    <h2>1. Titolare del trattamento</h2>
-    <p>Il titolare del trattamento è ${owner}, contattabile all'indirizzo ${email}.</p>
-    <h2>2. Quali dati raccogliamo</h2>
+    <h2>1. Quali dati raccogliamo</h2>
     <p>ParquetStats è un sito di sole statistiche: <b>non richiede registrazione, non contiene moduli, non usa cookie di profilazione né strumenti di analisi o pubblicità</b> e non carica risorse da server di terze parti (anche i caratteri tipografici sono inclusi nella pagina).</p>
     <p><b>Dati di navigazione.</b> Come ogni sito web, il server che ospita le pagine può registrare automaticamente alcuni dati tecnici a ogni visita: indirizzo IP, data e ora della richiesta, pagina richiesta, tipo di browser e sistema operativo. Questi dati servono solo a garantire il funzionamento e la sicurezza del sito e non vengono usati per identificare i visitatori.</p>
-    <h2>3. Base giuridica e finalità</h2>
+    <h2>2. Base giuridica e finalità</h2>
     <p>I dati di navigazione sono trattati sulla base del legittimo interesse del titolare a erogare il sito in modo sicuro e a prevenire abusi (art. 6, par. 1, lett. f del Regolamento UE 2016/679, "GDPR").</p>
+    <h2>3. Dati degli atleti</h2>
+    <p>Il sito pubblica statistiche di gara di atleti professionisti (nome abbreviato, squadra e dati di partita come punti, rimbalzi, assist e minuti), tratte da risultati pubblicamente disponibili, per finalità di informazione statistica sportiva e sulla base del legittimo interesse (art. 6, par. 1, lett. f GDPR). Non vengono pubblicati dati sulla salute, fotografie o altre informazioni personali. Gli atleti interessati possono chiedere la rettifica dei dati o opporsi al trattamento scrivendo a ${email}.</p>
     <h2>4. Archiviazione locale nel browser</h2>
     <p>Se scegli la lingua con il selettore IT/EN, la tua preferenza viene salvata nel tuo browser (archivio locale, voce <code>ps-lang</code>). È uno strumento tecnico necessario a ricordare la scelta: non viene inviato a nessun server, non serve a profilarti e per questo non richiede il consenso (art. 122 del Codice privacy e Linee guida del Garante su cookie e altri strumenti di tracciamento del 10 giugno 2021). Puoi cancellarlo in qualsiasi momento dalle impostazioni del browser.</p>
     <h2>5. Conservazione</h2>
@@ -936,13 +1264,13 @@ function viewPrivacy(){
     <h2>9. Modifiche</h2>
     <p>Questa informativa può essere aggiornata; la versione in vigore è sempre pubblicata in questa pagina. Ultimo aggiornamento: ${upd}.</p>`;
   const EN=`
-    <h2>1. Data controller</h2>
-    <p>The data controller is ${owner}, who can be contacted at ${email}.</p>
-    <h2>2. What data we collect</h2>
+    <h2>1. What data we collect</h2>
     <p>ParquetStats is a statistics-only website: <b>it requires no registration, contains no forms, uses no profiling cookies, analytics or advertising tools</b>, and loads no resources from third-party servers (fonts are also embedded in the page).</p>
     <p><b>Browsing data.</b> Like any website, the server hosting these pages may automatically log some technical data on each visit: IP address, date and time of the request, page requested, browser and operating system. This data is used only to keep the site running and secure, and is not used to identify visitors.</p>
-    <h2>3. Legal basis and purpose</h2>
+    <h2>2. Legal basis and purpose</h2>
     <p>Browsing data is processed on the basis of the controller's legitimate interest in providing the site securely and preventing abuse (Art. 6(1)(f) of EU Regulation 2016/679, "GDPR").</p>
+    <h2>3. Athletes' data</h2>
+    <p>The site publishes game statistics of professional athletes (abbreviated name, team and game data such as points, rebounds, assists and minutes), taken from publicly available results, for sports statistics information purposes and on the basis of legitimate interest (Art. 6(1)(f) GDPR). No health data, photographs or other personal information are published. Athletes concerned may request correction of their data or object to the processing by writing to ${email}.</p>
     <h2>4. Local storage in your browser</h2>
     <p>If you choose a language with the IT/EN selector, your preference is saved in your browser (local storage, key <code>ps-lang</code>). This is a strictly necessary technical tool to remember your choice: it is never sent to any server, is not used for profiling and therefore requires no consent (Art. 122 of the Italian Privacy Code and the Italian Data Protection Authority's guidelines on cookies and other tracking tools of 10 June 2021). You can delete it at any time from your browser settings.</p>
     <h2>5. Retention</h2>
@@ -968,17 +1296,20 @@ function render(){
   const p=location.hash.replace(/^#\/?/,'').split('/').filter(Boolean);
   const ctx={}; let html;
   if(p[0]==='l' && LG[p[1]]){
-    const L=LG[p[1]], tab=['stats','partite','classifica','analisi'].includes(p[2])?p[2]:'stats';
+    const L=LG[p[1]], tab=['stats','partite','classifica','analisi','giocatori'].includes(p[2])?p[2]:'stats';
     ctx.L=L; ctx.tab=tab;
     let body;
     if(tab==='classifica') body=viewStandings(L);
     else if(tab==='stats'){ ctx.mk=MK[p[3]]?p[3]:'1x2'; body=viewLeagueStats(L,ctx.mk); }
     else if(tab==='analisi') body=viewAnalysis(L,p[3],p[4]);
+    else if(tab==='giocatori') body=viewPlayers(L);
     else body=viewMatches(L);
     html=banner()+leagueHead(L,tab)+body;
     document.title=`${ln(L)} ${SEASON} – ParquetStats`;
   } else if(p[0]==='t' && LG[p[1]] && LG[p[1]].teams[+p[2]]!=null){
     ctx.L=LG[p[1]]; html=viewTeam(ctx.L,+p[2]); document.title=`${TN(ctx.L,+p[2])} – ParquetStats`;
+  } else if(p[0]==='p' && LG[p[1]] && LG[p[1]].players[+p[2]]){
+    ctx.L=LG[p[1]]; html=viewPlayer(ctx.L,+p[2]); document.title=`${ctx.L.players[+p[2]].name} – ParquetStats`;
   } else if(p[0]==='s' && MK[p[1]]){
     ctx.mk=p[1]; ctx.global=true; html=viewGlobal(p[1]); document.title=`${t('statsOf')(M(MK[p[1]]).long)} – ParquetStats`;
   } else if(p[0]==='privacy'){
@@ -993,7 +1324,7 @@ function chrome(ctx){
   $('#mainnav').innerHTML=`<a href="#/" class="${ctx.home?'on':''}">${t('home')}</a><a href="#/s/1x2" class="${ctx.global?'on':''}">${t('stats')}</a><a href="#/a" class="${ctx.tab==='analisi'?'on':''}">${t('analysis')}</a><span class="sep"></span>`+
     LEAGUES.map(L=>`<a href="#/l/${L.id}" class="${ctx.L===L&&!ctx.global?'on':''}">${flag(L.id)}${ln(L)}</a>`).join('');
   $('#marketbar').innerHTML=MK_ORDER.map(id=>`<a class="${ctx.mk===id?'on':''}" href="${ctx.L?`#/l/${ctx.L.id}/stats/${id}`:`#/s/${id}`}">${M(MK[id]).name}</a>`).join('');
-  ['#marketbar','#mainnav'].forEach(sel=>{ const a=$(sel+' a.on'); if(a&&a.scrollIntoView) a.scrollIntoView({block:'nearest',inline:'center'}); });
+  ['#marketbar','#mainnav','nav.tabs'].forEach(sel=>{ const a=$(sel+' a.on'); if(a&&a.scrollIntoView) a.scrollIntoView({block:'nearest',inline:'center'}); });
 }
 function applyLang(){
   document.documentElement.lang=LANG;
@@ -1004,7 +1335,8 @@ function applyLang(){
   $('#foot-contacts').href=PRIVACY.email?`mailto:${PRIVACY.email}`:'#/privacy';
   $('#foot-contacts').textContent=PRIVACY.email?`${t('contacts')}: ${PRIVACY.email}`:t('contacts');
   document.querySelectorAll('#lang button').forEach(b=>b.classList.toggle('on',b.dataset.lang===LANG));
-  $('#teamlist').innerHTML=LEAGUES.flatMap(L=>L.teams.map(n=>`<option value="${esc(tn(n))} (${L.code})">`)).join('');
+  $('#teamlist').innerHTML=LEAGUES.flatMap(L=>L.teams.map(n=>`<option value="${esc(tn(n))} (${L.code})">`)).join('')+
+    LEAGUES.flatMap(L=>L.players.map(p=>`<option value="${esc(p.name)} · ${esc(TN(L,p.team))}">`)).join('');
 }
 function setLang(l){
   LANG=l; try{ localStorage.setItem('ps-lang',l); }catch(e){}
@@ -1032,6 +1364,7 @@ document.addEventListener('click',e=>{
 document.addEventListener('change',e=>{
   const el=e.target;
   if(el.dataset.chg==='round'){ ui.round[el.dataset.l]=+el.value; render(); }
+  if(el.dataset.chg==='pteam'){ ui.pteam[el.dataset.l]=el.value==='all'?'all':+el.value; render(); }
   if(el.dataset.chg==='ana'){ const h=$('[data-side="h"]').value, a=$('[data-side="a"]').value; location.hash=`#/l/${el.dataset.l}/analisi/${h}/${a}`; }
 });
 $('#q').addEventListener('change',e=>{
@@ -1039,6 +1372,10 @@ $('#q').addEventListener('change',e=>{
   for(const L of LEAGUES){
     const i=L.teams.findIndex(n=>[n,tn(n)].some(x=>`${x} (${L.code})`.toLowerCase()===v || x.toLowerCase()===v));
     if(i>=0){ location.hash=`#/t/${L.id}/${i}`; e.target.value=''; e.target.blur(); return; }
+  }
+  for(const L of LEAGUES){
+    const p=L.players.find(p=>`${p.name} · ${TN(L,p.team)}`.toLowerCase()===v || p.name.toLowerCase()===v);
+    if(p){ location.hash=`#/p/${L.id}/${p.i}`; e.target.value=''; e.target.blur(); return; }
   }
 });
 window.addEventListener('hashchange',()=>{ render(); window.scrollTo(0,0); });
