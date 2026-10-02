@@ -726,6 +726,23 @@ const MK = {
     en:{ name:'Overtime', long:'Overtime Yes/No', desc:'The game is tied after 4 quarters and at least one overtime is played.', lo:['No','Yes'], to:['No','Yes'] } },
 };
 const M = mk => mk[LANG];
+/* Simbolo dell'esito mostrato al posto di "N" nelle tabelle.
+   1X2 e 12 visti dalla squadra: in casa la vittoria è "1", in trasferta è "2";
+   sul totale (casa + trasferta) si usano V/X/S (W/D/L in inglese). */
+const SYM = {
+  pd:{it:['P','D'],en:['E','O']}, ou:{it:['U','O'],en:['U','O']}, ou1t:{it:['U','O'],en:['U','O']}, pts:{it:['U','O'],en:['U','O']},
+  ot:{it:['No','Sì'],en:['No','Yes']},
+};
+function symFor(mk,i,venue){
+  const id=Object.keys(MK).find(k=>MK[k]===mk), n=M(mk).to.length;
+  if(id==='1x2'||id==='1x21t'||id==='12'){
+    const three=n===3, home=three?['1','X','2']:['1','2'], away=three?['2','X','1']:['2','1'];
+    const tot=three?(LANG==='it'?['V','X','S']:['W','D','L']):(LANG==='it'?['V','S']:['W','L']);
+    return (venue==='home'?home:venue==='away'?away:tot)[i];
+  }
+  if(SYM[id]) return SYM[id][LANG][i];
+  return M(mk).to[i];
+}
 const MK_ORDER = ['1x2','12','pd','ou','ou1t','1x21t','pts','mrg','ot'];
 const LINE_KS  = { tot:[-15,-10,-5,0,5,10,15], half:[-6,-3,0,3,6], team:[-10,-5,0,5,10] };
 const LINE_AVG = { tot:'avgTot', half:'avg1t', team:'avgTeam' };
@@ -881,8 +898,8 @@ function viewPlayers(L){
   const gO=`Over ${fmtLine(l)}`, gU=`Under ${fmtLine(l)}`;
   const ouCols=[rankCol(),{k:'name',label:t('player'),cls:'l',fmt:(v,r)=>playerA(r)},{k:'teamName',label:t('team'),cls:'l',fmt:(v,r)=>`<a class="tl" href="#/t/${r.lid}/${r.team}">${esc(v)}</a>`},
     {k:'g',label:t('gp'),title:t('gpT')},{k:'avg',label:t('avgCol'),fmt:fmt1},
-    {k:'on',label:'N',group:gO,title:t('nT')},{k:'op',label:'%',group:gO,heat:1,fmt:fmt1},
-    {k:'un',label:'N',group:gU,title:t('nT')},{k:'up',label:'%',group:gU,heat:1,fmt:fmt1},
+    {k:'on',label:'O',group:gO,title:t('nT')},{k:'op',label:'%',group:gO,heat:1,fmt:fmt1},
+    {k:'un',label:'U',group:gU,title:t('nT')},{k:'up',label:'%',group:gU,heat:1,fmt:fmt1},
     {k:'so',label:t('serO'),title:t('serOT'),group:t('streak')},{k:'su',label:t('serU'),title:t('serUT'),group:t('streak')}];
   const avRows=ps.map(p=>pAgg(L,p));
   return `<section class="card">
@@ -917,7 +934,7 @@ function viewPlayer(L,pi){
     <div class="card-h"><h2 class="sec">${t('plAll')}</h2></div>
     <div class="tw"><table class="st"><thead>
       <tr class="g"><th colspan="2" class="blank"></th><th colspan="2">Over</th><th colspan="2">Under</th><th colspan="2">${t('streak')}</th></tr>
-      <tr><th class="l">${t('stat')}</th><th>${t('line')}</th><th title="${t('nT')}">N</th><th>%</th><th title="${t('nT')}">N</th><th>%</th><th title="${t('serOT')}">${t('serO')}</th><th title="${t('serUT')}">${t('serU')}</th></tr></thead>
+      <tr><th class="l">${t('stat')}</th><th>${t('line')}</th><th title="${t('nT')}">O</th><th>%</th><th title="${t('nT')}">U</th><th>%</th><th title="${t('serOT')}">${t('serO')}</th><th title="${t('serUT')}">${t('serU')}</th></tr></thead>
       <tbody>${ou}</tbody></table></div>
   </section>
   <section class="card">
@@ -956,7 +973,7 @@ const rankCol = () => ({k:'_i',label:'#',nosort:1,cls:'rk',fmt:(v,r,i)=>i+1});
 function teamCols(mk,view,global,maxV){
   const c=[rankCol(),{k:'name',label:t('team'),cls:'l',fmt:(v,r)=>teamLink(r,global)},{k:'g',label:t('gp'),title:t('gpT')}];
   M(mk).to.forEach((x,i)=>{
-    if(view==='freq'){ c.push({k:'n'+i,label:'N',group:x,title:t('nT')}); c.push({k:'p'+i,label:'%',group:x,heat:1,fmt:fmt1}); }
+    if(view==='freq'){ c.push({k:'n'+i,label:symFor(mk,i,ui.venue),group:x,title:`${t('nT')}: ${x}`}); c.push({k:'p'+i,label:'%',group:x,heat:1,fmt:fmt1}); }
     else if(view==='rit'){ c.push({k:'d'+i,label:t('cur'),group:x,heat:1,heatMax:maxV}); c.push({k:'D'+i,label:t('max'),group:x}); }
     else { c.push({k:'s'+i,label:t('cur'),group:x,heat:1,heatMax:maxV}); c.push({k:'S'+i,label:t('max'),group:x}); }
   });
@@ -1004,7 +1021,7 @@ function viewHome(){
   const stat=mkId=>{ const mk=MK[mkId]; return LEAGUES.flatMap(L=>L.teams.map((n,i)=>teamRow(L,i,mk,lineVal(L,mk),'tot',1,L.maxR))); };
   const box=(id,title,sub,href,rows,key,isPct)=>{
     const cols=[rankCol(),{k:'name',label:t('team'),cls:'l',nosort:1,fmt:(v,r)=>teamLink(r,true)},{k:'g',label:t('gp'),nosort:1}];
-    if(isPct){ cols.push({k:key.replace('p','n'),label:'N',nosort:1}); cols.push({k:key,label:'%',nosort:1,heat:1,fmt:fmt1}); }
+    if(isPct){ cols.push({k:key.replace('p','n'),label:symFor(MK[{w:'12',o:'ou',e:'pd',h:'ou1t',ot:'ot'}[id]],+key.slice(1),'tot'),nosort:1}); cols.push({k:key,label:'%',nosort:1,heat:1,fmt:fmt1}); }
     else cols.push({k:key,label:t('streak'),nosort:1,heat:1,heatMax:Math.max(1,...rows.map(r=>r[key]))});
     const top=rows.slice().sort((a,b)=>b[key]-a[key]||b.g-a.g).slice(0,8);
     return `<section class="card box"><div class="card-h"><h3 class="mini">${title}<small>${sub}</small></h3><a href="${href}">${t('all')}</a></div>${tableHTML('home-'+id,cols,top)}</section>`;
