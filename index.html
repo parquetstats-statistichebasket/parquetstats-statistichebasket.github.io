@@ -581,6 +581,7 @@ const T = {
     resp:'Il gioco può causare dipendenza patologica ed è vietato ai minori. Gioca responsabilmente.',
     footer:'<strong>Il gioco può causare dipendenza patologica ed è vietato ai minori di 18 anni.</strong> Gioca responsabilmente. ParquetStats fornisce statistiche a solo scopo informativo e non raccoglie scommesse. Risultati inseriti manualmente: verifica sempre i dati prima di giocare.',
     terms:'Termini e condizioni', contacts:'Contatti',
+    disclaimer:'Sebbene vengano prodotti tutti gli sforzi necessari affinché le informazioni riportate sul nostro sito in relazione a un qualsiasi evento siano corrette, tali informazioni sono da considerarsi esclusivamente come una guida. Nell\'eventualità in cui un particolare tipo di informazione (risultato, tipologia di incontro, ecc.) fosse riportato in maniera inesatta, ParquetStats non si assume alcuna responsabilità al riguardo.',
     banner:d=>`<b>Stagione ${SEASON} · risultati aggiornati al ${d}.</b> Le prime giornate offrono un campione ridotto: le percentuali diventano affidabili con il crescere delle partite giocate.`,
     round:'Giornata', team:'Squadra', gp:'G', gpT:'Partite giocate', nT:'Numero partite', cur:'Attuale', max:'Max', noData:'Nessun dato disponibile',
     views:{freq:'Frequenze',rit:'Top ritardi',ser:'Top serie'},
@@ -636,6 +637,7 @@ const T = {
     resp:'Gambling can be addictive and is forbidden to minors. Play responsibly.',
     footer:'<strong>Gambling can be addictive and is forbidden to anyone under 18.</strong> Play responsibly. ParquetStats provides statistics for information only and does not accept bets. Results are entered manually: always double-check the data before betting.',
     terms:'Terms & conditions', contacts:'Contact',
+    disclaimer:'While every effort is made to ensure that the information on our site relating to any event is correct, such information is to be considered as a guide only. Should any particular type of information (result, type of match, etc.) be reported inaccurately, ParquetStats accepts no responsibility in this regard.',
     banner:d=>`<b>Season ${SEASON} · results updated to ${d}.</b> Early rounds give a small sample: percentages become reliable as more games are played.`,
     round:'Round', team:'Team', gp:'GP', gpT:'Games played', nT:'Number of games', cur:'Current', max:'Max', noData:'No data available',
     views:{freq:'Frequencies',rit:'Top droughts',ser:'Top streaks'},
@@ -1347,7 +1349,7 @@ function chrome(ctx){
 function applyLang(){
   document.documentElement.lang=LANG;
   $('#q').placeholder=t('search');
-  $('#foot-text').innerHTML=t('footer');
+  $('#foot-text').innerHTML=t('footer')+'<br><br>'+t('disclaimer');
   $('#foot-terms').textContent=t('terms');
   $('#foot-privacy').textContent=t('privacyTitle');
   $('#foot-contacts').href=PRIVACY.email?`mailto:${PRIVACY.email}`:'#/privacy';
