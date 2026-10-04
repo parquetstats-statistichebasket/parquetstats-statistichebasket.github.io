@@ -562,7 +562,7 @@ const PRIVACY = {
   logDays: '',            // giorni di conservazione dei log; vuoto = "per il periodo stabilito dal fornitore"
   usaTransfer: true,      // true se il fornitore è negli USA (GitHub, Netlify, Cloudflare…); false per hosting UE (es. Hostinger)
   hostPolicy: 'https://docs.github.com/it/site-policy/privacy-policies/github-general-privacy-statement', // informativa del fornitore
-  updated: '2026-10-02',  // data ultimo aggiornamento dell'informativa
+  updated: '2026-10-04',  // data ultimo aggiornamento dell'informativa
 };
 
 /* Nomi squadra mostrati in inglese quando diversi dall'italiano */
@@ -1265,7 +1265,8 @@ function viewPrivacy(){
   const missing=!(PRIVACY.email&&PRIVACY.hosting);
   const IT=`
     <h2>1. Quali dati raccogliamo</h2>
-    <p>ParquetStats è un sito di sole statistiche: <b>non richiede registrazione, non contiene moduli, non usa cookie di profilazione né strumenti di analisi o pubblicità</b> e non carica risorse da server di terze parti (anche i caratteri tipografici sono inclusi nella pagina).</p>
+    <p>ParquetStats è un sito di sole statistiche: <b>non richiede registrazione, non contiene moduli e non usa cookie né strumenti di profilazione o pubblicità</b>. Per conoscere in forma aggregata quante persone visitano il sito usiamo il contatore di visite GoatCounter (vedi sotto); i caratteri tipografici sono invece inclusi nella pagina e non vengono caricati da server esterni.</p>
+    <p><b>Statistiche di visita (GoatCounter).</b> Per contare le visite il sito carica uno script dal servizio GoatCounter (<a href="https://www.goatcounter.com" rel="noopener">goatcounter.com</a>), che non usa cookie e non identifica i singoli visitatori né ne costruisce un profilo. Registra solo dati tecnici e aggregati sulle visite, come pagina visualizzata, provenienza, tipo di browser e dimensione dello schermo. Per questo non serve il consenso; informazioni sul trattamento svolto dal fornitore sono disponibili nella sua <a href="https://www.goatcounter.com/privacy" rel="noopener">informativa privacy</a>.</p>
     <p><b>Dati di navigazione.</b> Come ogni sito web, il server che ospita le pagine può registrare automaticamente alcuni dati tecnici a ogni visita: indirizzo IP, data e ora della richiesta, pagina richiesta, tipo di browser e sistema operativo. Questi dati servono solo a garantire il funzionamento e la sicurezza del sito e non vengono usati per identificare i visitatori.</p>
     <h2>2. Base giuridica e finalità</h2>
     <p>I dati di navigazione sono trattati sulla base del legittimo interesse del titolare a erogare il sito in modo sicuro e a prevenire abusi (art. 6, par. 1, lett. f del Regolamento UE 2016/679, "GDPR").</p>
@@ -1285,7 +1286,8 @@ function viewPrivacy(){
     <p>Questa informativa può essere aggiornata; la versione in vigore è sempre pubblicata in questa pagina. Ultimo aggiornamento: ${upd}.</p>`;
   const EN=`
     <h2>1. What data we collect</h2>
-    <p>ParquetStats is a statistics-only website: <b>it requires no registration, contains no forms, uses no profiling cookies, analytics or advertising tools</b>, and loads no resources from third-party servers (fonts are also embedded in the page).</p>
+    <p>ParquetStats is a statistics-only website: <b>it requires no registration, contains no forms, and uses no cookies, profiling or advertising tools</b>. To learn in aggregate how many people visit the site we use the GoatCounter visit counter (see below); fonts are embedded in the page and are not loaded from external servers.</p>
+    <p><b>Visit statistics (GoatCounter).</b> To count visits the site loads a script from the GoatCounter service (<a href="https://www.goatcounter.com" rel="noopener">goatcounter.com</a>), which uses no cookies and does not identify individual visitors or build a profile of them. It records only technical, aggregated data about visits, such as the page viewed, referrer, browser type and screen size. For this reason no consent is required; information on the processing carried out by the provider is available in its <a href="https://www.goatcounter.com/privacy" rel="noopener">privacy policy</a>.</p>
     <p><b>Browsing data.</b> Like any website, the server hosting these pages may automatically log some technical data on each visit: IP address, date and time of the request, page requested, browser and operating system. This data is used only to keep the site running and secure, and is not used to identify visitors.</p>
     <h2>2. Legal basis and purpose</h2>
     <p>Browsing data is processed on the basis of the controller's legitimate interest in providing the site securely and preventing abuse (Art. 6(1)(f) of EU Regulation 2016/679, "GDPR").</p>
@@ -1398,7 +1400,17 @@ $('#q').addEventListener('change',e=>{
     if(p){ location.hash=`#/p/${L.id}/${p.i}`; e.target.value=''; e.target.blur(); return; }
   }
 });
-window.addEventListener('hashchange',()=>{ render(); window.scrollTo(0,0); });
+/* Contatore visite GoatCounter (senza cookie). Il sito usa indirizzi con #, quindi ogni schermata viene contata a mano. */
+function gcCount(){
+  if(window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path:'/'+location.hash.replace(/^#\/?/,''), title:document.title });
+}
+(function(){
+  window.goatcounter={ no_onload:true };
+  const g=document.createElement('script'); g.async=true; g.src='https://gc.zgo.at/count.js';
+  g.setAttribute('data-goatcounter','https://parquetstats.goatcounter.com/count');
+  g.onload=gcCount; document.head.appendChild(g);
+})();
+window.addEventListener('hashchange',()=>{ render(); window.scrollTo(0,0); gcCount(); });
 applyLang();
 render();
 </script>
