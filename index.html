@@ -796,8 +796,8 @@ const T = {
     round:'Giornata', team:'Squadra', gp:'G', gpT:'Partite giocate', nT:'Numero partite', cur:'Attuale', max:'Max', noData:'Nessun dato disponibile',
     views:{freq:'Frequenze',rit:'Top ritardi',ser:'Top serie'},
     hints:{freq:'Quante volte si è verificato ciascun esito e con quale percentuale.',
-           rit:'Ritardo: partite consecutive senza che l\'esito si verifichi. "Attuale" è il ritardo in corso, "Max" il più lungo della stagione.',
-           ser:'Serie: partite consecutive in cui l\'esito si è verificato. "Attuale" è la serie in corso, "Max" la più lunga della stagione.'},
+           rit:'Ritardo: partite consecutive senza che l\'esito si verifichi. "Attuale" è il ritardo in corso.',
+           ser:'Serie: partite consecutive in cui l\'esito si è verificato. "Attuale" è la serie in corso.'},
     venues:{tot:'Totale',home:'In casa',away:'In trasferta'},
     line:'Linea', lineAvg:'Media campionato', lineRel:k=>`Media ${k>0?'+':'−'}${Math.abs(k)}`, games:'Partite', period:'Periodo',
     rangeFrom:'Giornata dalla', rangeTo:'alla', calc:'Calcola', last10:'Ultime 10', fullSeason:'Tutta la stagione',
@@ -853,8 +853,8 @@ const T = {
     round:'Round', team:'Team', gp:'GP', gpT:'Games played', nT:'Number of games', cur:'Current', max:'Max', noData:'No data available',
     views:{freq:'Frequencies',rit:'Top droughts',ser:'Top streaks'},
     hints:{freq:'How often each outcome occurred and its percentage.',
-           rit:'Drought: consecutive games without the outcome. "Current" is the ongoing drought, "Max" the longest of the season.',
-           ser:'Streak: consecutive games with the outcome. "Current" is the ongoing streak, "Max" the longest of the season.'},
+           rit:'Drought: consecutive games without the outcome. "Current" is the ongoing drought.',
+           ser:'Streak: consecutive games with the outcome. "Current" is the ongoing streak.'},
     venues:{tot:'Overall',home:'Home',away:'Away'},
     line:'Line', lineAvg:'League average', lineRel:k=>`Average ${k>0?'+':'−'}${Math.abs(k)}`, games:'Games', period:'Period',
     rangeFrom:'From round', rangeTo:'to', calc:'Apply', last10:'Last 10', fullSeason:'Full season',
@@ -1193,8 +1193,8 @@ function teamCols(mk,view,global,maxV){
   }
   M(mk).to.forEach((x,i)=>{
     if(false){}
-    else if(view==='rit'){ c.push({k:'d'+i,label:t('cur'),group:x,heat:1,heatMax:maxV}); c.push({k:'D'+i,label:t('max'),group:x}); }
-    else { c.push({k:'s'+i,label:t('cur'),group:x,heat:1,heatMax:maxV}); c.push({k:'S'+i,label:t('max'),group:x}); }
+    else if(view==='rit'){ c.push({k:'d'+i,label:t('cur'),group:x,heat:1,heatMax:maxV}); }
+    else { c.push({k:'s'+i,label:t('cur'),group:x,heat:1,heatMax:maxV}); }
   });
   return c;
 }
@@ -1536,7 +1536,7 @@ async function exportTable(sec,tb,btn){
     const areaW=W-2*PAD; let ncol=hdr.length, fs=26, widths=[];
     const fitCols=()=>{
       c.font=`700 ${fs}px Barlow, sans-serif`;
-      widths=Array.from({length:ncol},(_,i)=>{ let m=c.measureText(hdr[i]).width; c.font=`500 ${fs}px Barlow, sans-serif`; body.forEach(r=>{ if(r[i]) m=Math.max(m,c.measureText(r[i].t).width); }); c.font=`700 ${fs}px Barlow, sans-serif`; return m+22; });
+      widths=Array.from({length:ncol},(_,i)=>{ let m=c.measureText(hdr[i].toUpperCase()).width; c.font=`500 ${fs}px Barlow, sans-serif`; body.forEach(r=>{ if(r[i]) m=Math.max(m,c.measureText(r[i].t).width); }); c.font=`700 ${fs}px Barlow, sans-serif`; return m+22; });
       return widths.reduce((a,b)=>a+b,0);
     };
     while(fitCols()>areaW){ if(fs>20) fs-=1; else if(ncol>4) ncol--; else break; }
