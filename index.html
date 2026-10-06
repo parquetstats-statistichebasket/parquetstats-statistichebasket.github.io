@@ -1185,8 +1185,14 @@ const rankCol = () => ({k:'_i',label:'#',nosort:1,cls:'rk',fmt:(v,r,i)=>i+1});
 
 function teamCols(mk,view,global,maxV){
   const c=[rankCol(),{k:'name',label:t('team'),cls:'l',fmt:(v,r)=>teamLink(r,global)},{k:'g',label:t('gp'),title:t('gpT')}];
+  if(view==='freq'){
+    /* prima tutti i conteggi (V X 2), poi tutte le percentuali (%V %X %2) */
+    M(mk).to.forEach((x,i)=>c.push({k:'n'+i,label:symFor(mk,i,ui.venue),group:t('nGames'),title:`${t('nT')}: ${x}`}));
+    M(mk).to.forEach((x,i)=>c.push({k:'p'+i,label:'%'+symFor(mk,i,ui.venue),group:'%',heat:1,fmt:fmt1,title:`% ${x}`}));
+    return c;
+  }
   M(mk).to.forEach((x,i)=>{
-    if(view==='freq'){ c.push({k:'n'+i,label:symFor(mk,i,ui.venue),group:x,title:`${t('nT')}: ${x}`}); c.push({k:'p'+i,label:'%',group:x,heat:1,fmt:fmt1}); }
+    if(false){}
     else if(view==='rit'){ c.push({k:'d'+i,label:t('cur'),group:x,heat:1,heatMax:maxV}); c.push({k:'D'+i,label:t('max'),group:x}); }
     else { c.push({k:'s'+i,label:t('cur'),group:x,heat:1,heatMax:maxV}); c.push({k:'S'+i,label:t('max'),group:x}); }
   });
