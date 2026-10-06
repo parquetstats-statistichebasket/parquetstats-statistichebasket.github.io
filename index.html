@@ -1398,7 +1398,7 @@ function viewAnalysis(L,hs,as){
   </section>
   <section class="card">
     <div class="card-h"><h2 class="sec">${t('byMarket')}</h2><span class="muted" style="font-size:13px">${t('star70')}</span></div>
-    <div class="tw"><table class="st"><thead><tr><th class="l">${t('market')}</th><th class="l">${t('outcome')}</th><th>${esc(TN(L,h))}<br><span style="font-size:11px;opacity:.8">${t('atHome')(nH)}</span></th><th>${esc(TN(L,a))}<br><span style="font-size:11px;opacity:.8">${t('onRoad')(nA)}</span></th><th>${t('avgPct')}</th></tr></thead><tbody>${blocks}</tbody></table></div>
+    <div class="tw"><table class="st ana"><thead><tr><th class="l">${t('market')}</th><th class="l">${t('outcome')}</th><th>${esc(TN(L,h))}<br><span style="font-size:11px;opacity:.8">${t('atHome')(nH)}</span></th><th>${esc(TN(L,a))}<br><span style="font-size:11px;opacity:.8">${t('onRoad')(nA)}</span></th><th>${t('avgPct')}</th></tr></thead><tbody>${blocks}</tbody></table></div>
   </section>
   <section class="card">
     <div class="card-h"><h2 class="sec">${t('h2h')}</h2></div>
@@ -1556,7 +1556,8 @@ async function exportTable(sec,tb,btn){
     c.fillText(title,PAD,215);
     c.font='500 26px Barlow, sans-serif'; c.fillStyle='#7C6650'; const mkOn=document.querySelector('.mk-pills .pill.on'); const vwOn=document.querySelector('.tabs.sm .tab.on'); const lnOn=document.querySelector('.pill.on[data-ui^="k."]'); c.fillText(lg+(mkOn?mkOn.textContent.trim()+' · ':'')+(lnOn?t('line')+' '+lnOn.textContent.trim()+' · ':'')+(vwOn?vwOn.textContent.trim()+' · ':'')+t('imgUpd')(fmtDate(LAST)),PAD,262);
     // tabella
-    let y=300; const rh=Math.min(66,Math.floor((H-y-170-(grp?58:0)-58)/ (body.length)));
+    let y=300; if(tb.classList.contains('ana')){ y=drawAnaTable(c,tb,cellTxt,{W,H,PAD,areaW,y0:300}); } else {
+    const rh=Math.min(66,Math.floor((H-y-170-(grp?58:0)-58)/ (body.length)));
     const drawRow=(cells,yy,h,style)=>{ let x=PAD; for(let i=0;i<ncol;i++){ const cell=cells[i]||{t:''}; const w=widths[i];
         if(style==='head'){ } else if(cell.bg){ c.fillStyle=cell.bg.includes('rgba')?cell.bg:'#FFE6D1'; c.fillRect(x,yy,w,h); }
         c.font=(style==='head'||/font-weight:\s*7/.test('')||cell.fg==='#fff'||cell.fg==='rgb(255, 255, 255)')?`700 ${fs}px Barlow, sans-serif`:`500 ${fs}px Barlow, sans-serif`;
@@ -1567,6 +1568,7 @@ async function exportTable(sec,tb,btn){
     c.fillStyle='#24170F'; c.fillRect(PAD,y,areaW,58); drawRow(hdr.map(h=>({t:h.toUpperCase()})),y,58,'head'); y+=58;
     body.forEach((r,ri)=>{ c.fillStyle=ri%2?'#F6E9D0':'#FFFBF4'; c.fillRect(PAD,y,areaW,rh); drawRow(r.map(x=>x),y,rh); c.strokeStyle='#E7D2A8'; c.lineWidth=1; c.beginPath(); c.moveTo(PAD,y+rh); c.lineTo(PAD+areaW,y+rh); c.stroke(); y+=rh; });
     c.strokeStyle='#DDBF8A'; c.lineWidth=2; c.strokeRect(PAD,300,areaW,y-300);
+    }
     // piede
     c.fillStyle='#24170F'; c.fillRect(0,H-150,W,150); c.fillStyle='#E8702A'; c.fillRect(0,H-150,W,6);
     c.textBaseline='middle'; c.font='700 34px Barlow, sans-serif'; c.fillStyle='#fff'; c.fillText('parquetstats-statistichebasket.github.io',PAD,H-108);
@@ -1580,6 +1582,64 @@ async function exportTable(sec,tb,btn){
     showImgModal(blob,name);
   }catch(e){ console.error(e); }
   btn.textContent=old; btn.disabled=false;
+}
+
+/* Tabella "Percentuali per mercato" (Analisi partita) per l'immagine:
+   blocchi per mercato con cella mercato unita, intestazione su due righe, tutte le righe visibili. */
+function drawAnaTable(c,tb,cellTxt,o){
+  const {H,PAD,areaW,y0}=o, FF='Barlow, sans-serif';
+  const blocks=[]; let cur=null;
+  const g=td=>({t:cellTxt(td),bg:td.style.background||'',fg:td.style.color||''});
+  [...tb.querySelectorAll('tbody tr')].forEach(tr=>{
+    const td=[...tr.children]; let k=0;
+    if(td[0].hasAttribute('rowspan')){ cur={name:cellTxt(td[0]),rows:[]}; blocks.push(cur); k=1; }
+    cur.rows.push({o:cellTxt(td[k]),v:[g(td[k+1]),g(td[k+2]),g(td[k+3])]});
+  });
+  const n=blocks.reduce((a,b)=>a+b.rows.length,0), HEAD=76, bottom=H-150-52;
+  const rh=Math.max(26,Math.min(46,Math.floor((bottom-y0-HEAD)/n))), fs=Math.max(18,Math.min(26,Math.round(rh*0.66)));
+  // intestazioni
+  const th=[...tb.querySelectorAll('thead th')].map(h=>{ const sp=h.querySelector('span'); return {a:cellTxt(sp?h.firstChild:h).trim(), b:sp?cellTxt(sp):''}; });
+  // larghezze
+  c.font=`500 ${fs}px ${FF}`; const outW=Math.max(130,...blocks.flatMap(b=>b.rows.map(r=>c.measureText(r.o).width+24)));
+  const mkW=230, avgW=150, tW=(areaW-mkW-outW-avgW)/2, W4=[mkW,outW,tW,tW,avgW];
+  const X=[PAD]; W4.forEach((w,i)=>X.push(X[i]+w));
+  // header
+  c.fillStyle='#24170F'; c.fillRect(PAD,y0,areaW,HEAD);
+  th.forEach((h,i)=>{
+    const left=i<2, cx=left?X[i]+12:X[i]+W4[i]/2; c.textAlign=left?'left':'center'; c.textBaseline='middle';
+    let f=22; c.font=`700 ${f}px ${FF}`; const tx=h.a.toUpperCase(); while(c.measureText(tx).width>W4[i]-14&&f>14){ f--; c.font=`700 ${f}px ${FF}`; }
+    c.fillStyle='#F2DFBA'; c.fillText(tx,cx,y0+(h.b?27:HEAD/2));
+    if(h.b){ c.font=`500 17px ${FF}`; c.fillStyle='#CDB9A2'; c.fillText(h.b.toUpperCase(),cx,y0+54); }
+  });
+  c.textAlign='left';
+  // corpo
+  let y=y0+HEAD; const wrap=(txt,w)=>{ const ws=txt.split(' '); const L=[]; let l=''; ws.forEach(x=>{ const t=l?l+' '+x:x; if(c.measureText(t).width>w&&l){ L.push(l); l=x; } else l=t; }); if(l) L.push(l); return L; };
+  blocks.forEach((b,bi)=>{
+    const bh=b.rows.length*rh, base=bi%2?'#F6E9D0':'#FFFBF4';
+    c.fillStyle=base; c.fillRect(PAD,y,areaW,bh);
+    // cella mercato unita
+    c.fillStyle='#FFE6D1'; c.fillRect(X[0],y,W4[0],bh);
+    c.font=`700 ${fs}px ${FF}`; c.fillStyle='#24170F'; c.textBaseline='middle'; c.textAlign='left';
+    const ls=wrap(b.name,W4[0]-20), lh=fs+4, y1=y+bh/2-(ls.length-1)*lh/2; ls.forEach((l,i)=>c.fillText(l,X[0]+12,y1+i*lh+1));
+    b.rows.forEach((r,ri)=>{
+      const yy=y+ri*rh;
+      c.font=`500 ${fs}px ${FF}`; c.fillStyle='#24170F'; c.textAlign='left'; c.fillText(r.o,X[1]+12,yy+rh/2+1);
+      r.v.forEach((cell,j)=>{ const i=j+2;
+        if(cell.bg){ c.fillStyle=cell.bg.includes('rgba')?cell.bg:'#FFE6D1'; c.fillRect(X[i],yy,W4[i],rh); }
+        const strong=cell.fg==='#fff'||cell.fg==='rgb(255, 255, 255)'||i===4;
+        c.font=`${strong?700:500} ${fs}px ${FF}`; c.fillStyle=cell.fg||'#24170F'; c.textAlign='center'; c.fillText(cell.t,X[i]+W4[i]/2,yy+rh/2+1);
+      });
+      if(ri<b.rows.length-1){ c.strokeStyle='#EBDDBC'; c.lineWidth=1; c.beginPath(); c.moveTo(X[1],yy+rh); c.lineTo(PAD+areaW,yy+rh); c.stroke(); }
+    });
+    y+=bh; c.strokeStyle='#C9A66B'; c.lineWidth=2; c.beginPath(); c.moveTo(PAD,y); c.lineTo(PAD+areaW,y); c.stroke();
+  });
+  // separatori verticali
+  c.strokeStyle='#E7D2A8'; c.lineWidth=1; for(let i=1;i<5;i++){ c.beginPath(); c.moveTo(X[i],y0+HEAD); c.lineTo(X[i],y); c.stroke(); }
+  c.strokeStyle='#DDBF8A'; c.lineWidth=2; c.strokeRect(PAD,y0,areaW,y-y0);
+  c.textAlign='left';
+  // legenda stella
+  c.font=`500 20px ${FF}`; c.fillStyle='#7C6650'; c.textAlign='right'; c.fillText(t('star70'),PAD+areaW,y+26); c.textAlign='left';
+  return y;
 }
 
 /* Anteprima dell'immagine con pulsante di download (PC e telefoni senza condivisione) */
