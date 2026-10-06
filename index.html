@@ -1548,7 +1548,7 @@ async function exportTable(sec,tb,btn){
     let title=(sec.querySelector('h2.sec')?.textContent||'').trim().toUpperCase();
     c.fillStyle='#24170F'; let tfs=54; c.font=`700 ${tfs}px "Barlow Condensed", Barlow, sans-serif`; while(c.measureText(title).width>areaW&&tfs>30){ tfs-=2; c.font=`700 ${tfs}px "Barlow Condensed", Barlow, sans-serif`; }
     c.fillText(title,PAD,215);
-    c.font='500 26px Barlow, sans-serif'; c.fillStyle='#7C6650'; const mkOn=document.querySelector('.mk-pills .pill.on'); c.fillText(lg+(mkOn?mkOn.textContent.trim()+' · ':'')+t('imgUpd')(fmtDate(LAST)),PAD,262);
+    c.font='500 26px Barlow, sans-serif'; c.fillStyle='#7C6650'; const mkOn=document.querySelector('.mk-pills .pill.on'); const vwOn=document.querySelector('.tabs.sm .tab.on'); c.fillText(lg+(mkOn?mkOn.textContent.trim()+' · ':'')+(vwOn?vwOn.textContent.trim()+' · ':'')+t('imgUpd')(fmtDate(LAST)),PAD,262);
     // tabella
     let y=300; const rh=Math.min(66,Math.floor((H-y-170-(grp?58:0)-58)/ (body.length)));
     const drawRow=(cells,yy,h,style)=>{ let x=PAD; for(let i=0;i<ncol;i++){ const cell=cells[i]||{t:''}; const w=widths[i];
