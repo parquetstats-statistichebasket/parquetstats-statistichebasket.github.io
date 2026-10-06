@@ -224,6 +224,7 @@ table.st{width:100%;border-collapse:collapse;font-size:14px}
 .vsbar .side select{font-size:15px;padding:7px 10px;width:100%;max-width:280px}
 .vsball{width:54px;height:54px}
 .star{color:var(--orange-d);font-weight:800}
+.cnt{font-size:.82em;opacity:.72;font-weight:500;white-space:nowrap}
 
 /* chart */
 .chart{padding:8px 14px 14px}
@@ -1373,7 +1374,7 @@ function viewAnalysis(L,hs,as){
   const eH=mix(hPF,aPA), eA=mix(aPF,hPA);
   const kp=!(nH||nA)?[]:[[t('expPts')(TN(L,h)),fmt1(eH)],[t('expPts')(TN(L,a)),fmt1(eA)],[t('expTot'),fmt1(eH+eA)],[t('expDiff'),(eH-eA>0?'+':'')+fmt1(eH-eA)]];
 
-  const dash='<td class="muted">–</td>', cell=v=>v==null?dash:`<td ${heat(v)}>${fmt1(v)}</td>`;
+  const dash='<td class="muted">–</td>', cell=(v,k,n)=>v==null?dash:`<td ${heat(v)}>${fmt1(v)}<span class="cnt"> · ${k}/${n}</span></td>`;
   const blocks=MK_ORDER.map(id=>{
     const mk=MK[id], l=lineVal(L,mk), title=M(mk).name+(l!=null?' '+fmtLine(l):'');
     const rs=mk.perTeam
@@ -1381,7 +1382,7 @@ function viewAnalysis(L,hs,as){
       : M(mk).lo.map((o,i)=>[o==='1'?t('one'):o==='2'?t('two'):o, g=>mk.m(g,l)===i]);
     return rs.map(([o,f],i)=>{
       const p1=nH?pctOf(HG,f):null, p2=nA?pctOf(AG,f):null, m=p1==null?p2:p2==null?p1:(p1+p2)/2;
-      return `<tr>${i===0?`<td class="l" rowspan="${rs.length}" style="font-weight:700;background:#FFF8EE">${title}</td>`:''}<td class="l">${o}</td>${cell(p1)}${cell(p2)}${m==null?dash:`<td ${heat(m)}><b>${fmt1(m)}</b>${m>=70?' <span class="star">★</span>':''}</td>`}</tr>`;
+      return `<tr>${i===0?`<td class="l" rowspan="${rs.length}" style="font-weight:700;background:#FFF8EE">${title}</td>`:''}<td class="l">${o}</td>${cell(p1,nH?HG.filter(f).length:0,nH)}${cell(p2,nA?AG.filter(f).length:0,nA)}${m==null?dash:`<td ${heat(m)}><b>${fmt1(m)}</b>${m>=70?' <span class="star">★</span>':''}</td>`}</tr>`;
     }).join('');
   }).join('');
   const h2h=L.matches.filter(g=>(g.h===h&&g.a===a)||(g.h===a&&g.a===h));
