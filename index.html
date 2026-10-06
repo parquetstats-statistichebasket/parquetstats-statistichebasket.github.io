@@ -1193,8 +1193,8 @@ function teamCols(mk,view,global,maxV){
   }
   M(mk).to.forEach((x,i)=>{
     if(false){}
-    else if(view==='rit'){ c.push({k:'d'+i,label:t('cur'),group:x,heat:1,heatMax:maxV}); }
-    else { c.push({k:'s'+i,label:t('cur'),group:x,heat:1,heatMax:maxV}); }
+    else if(view==='rit'){ c.push({k:'d'+i,label:x,heat:1,heatMax:maxV,title:`${t('views')[view]}: ${x}`}); }
+    else { c.push({k:'s'+i,label:x,heat:1,heatMax:maxV,title:`${t('views')[view]}: ${x}`}); }
   });
   return c;
 }
