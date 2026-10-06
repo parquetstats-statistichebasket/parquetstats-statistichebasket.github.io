@@ -793,11 +793,11 @@ const T = {
     saveImg:'Salva immagine', imgDl:'Scarica PNG', imgClose:'Chiudi', imgHint:'Se il download non parte, clicca sull\'immagine con il tasto destro e scegli «Salva immagine con nome».', imgBusy:'Creo l\'immagine…', imgFoot:'Solo statistiche e informazioni. Il gioco può causare dipendenza patologica. Gioca responsabilmente.', imgUpd:d=>`Dati aggiornati al ${d}`,
     disclaimer:'Sebbene vengano prodotti tutti gli sforzi necessari affinché le informazioni riportate sul nostro sito in relazione a un qualsiasi evento siano corrette, tali informazioni sono da considerarsi esclusivamente come una guida. Nell\'eventualità in cui un particolare tipo di informazione (risultato, tipologia di incontro, ecc.) fosse riportato in maniera inesatta, ParquetStats non si assume alcuna responsabilità al riguardo.',
     banner:d=>`<b>Stagione ${SEASON} · risultati aggiornati al ${d}.</b> Le prime giornate offrono un campione ridotto: le percentuali diventano affidabili con il crescere delle partite giocate.`,
-    round:'Giornata', team:'Squadra', gp:'G', gpT:'Partite giocate', nT:'Numero partite', cur:'Attuale', max:'Max', noData:'Nessun dato disponibile',
+    round:'Giornata', team:'Squadra', gp:'G', gpT:'Partite giocate', nT:'Numero partite', noData:'Nessun dato disponibile',
     views:{freq:'Frequenze',rit:'Top ritardi',ser:'Top serie'},
     hints:{freq:'Quante volte si è verificato ciascun esito e con quale percentuale.',
-           rit:'Ritardo: partite consecutive senza che l\'esito si verifichi. "Attuale" è il ritardo in corso.',
-           ser:'Serie: partite consecutive in cui l\'esito si è verificato. "Attuale" è la serie in corso.'},
+           rit:'Ritardo: partite consecutive senza che l\'esito si verifichi. Il numero indica il ritardo in corso.',
+           ser:'Serie: partite consecutive in cui l\'esito si è verificato. Il numero indica la serie in corso.'},
     venues:{tot:'Totale',home:'In casa',away:'In trasferta'},
     line:'Linea', lineAvg:'Media campionato', lineRel:k=>`Media ${k>0?'+':'−'}${Math.abs(k)}`, games:'Partite', period:'Periodo',
     rangeFrom:'Giornata dalla', rangeTo:'alla', calc:'Calcola', last10:'Ultime 10', fullSeason:'Tutta la stagione',
@@ -828,7 +828,7 @@ const T = {
     older:'← meno recenti', newer:'più recenti →', chartAria:'Somma punti ultime partite',
     kPos:'Posizione', kRec:'Record', kPF:'Punti fatti', kPA:'Punti subiti', kAvgSum:'Media somma',
     analyze:'Analizza una partita', last20:'Somma punti ultime 20 partite', orangeOver:l=>`Arancione = Over ${l}`, allMk:'Tutti i mercati', linesNote:'Linee: media del campionato',
-    freqPct:'Frequenza %', trend:'Andamento', total:'Totale', drought:'Ritardo', droughtT:'Partite consecutive senza l\'esito', streakT:'Serie in corso', maxStreak:'Max serie', maxStreakT:'Serie massima',
+    freqPct:'Frequenza %', trend:'Andamento', total:'Totale', drought:'Ritardo', droughtT:'Partite consecutive senza l\'esito', streakT:'Serie in corso',
     last10g:'Ultime 10 partite', rd:'Gior.', opp:'Avversario', res:'Ris.', resultCol:'Esito',
     title:'ParquetStats – Statistiche basket per le scommesse',
     players:'Giocatori', player:'Giocatore', allTeams:'Tutte le squadre', stat:'Statistica', avgCol:'Media',
@@ -850,11 +850,11 @@ const T = {
     saveImg:'Save image', imgDl:'Download PNG', imgClose:'Close', imgHint:'If the download does not start, right-click the image and choose “Save image as”.', imgBusy:'Creating image…', imgFoot:'Statistics and information only. Gambling can be addictive. Play responsibly.', imgUpd:d=>`Data updated to ${d}`,
     disclaimer:'While every effort is made to ensure that the information on our site relating to any event is correct, such information is to be considered as a guide only. Should any particular type of information (result, type of match, etc.) be reported inaccurately, ParquetStats accepts no responsibility in this regard.',
     banner:d=>`<b>Season ${SEASON} · results updated to ${d}.</b> Early rounds give a small sample: percentages become reliable as more games are played.`,
-    round:'Round', team:'Team', gp:'GP', gpT:'Games played', nT:'Number of games', cur:'Current', max:'Max', noData:'No data available',
+    round:'Round', team:'Team', gp:'GP', gpT:'Games played', nT:'Number of games', noData:'No data available',
     views:{freq:'Frequencies',rit:'Top droughts',ser:'Top streaks'},
     hints:{freq:'How often each outcome occurred and its percentage.',
-           rit:'Drought: consecutive games without the outcome. "Current" is the ongoing drought.',
-           ser:'Streak: consecutive games with the outcome. "Current" is the ongoing streak.'},
+           rit:'Drought: consecutive games without the outcome. The number shows the ongoing drought.',
+           ser:'Streak: consecutive games with the outcome. The number shows the ongoing streak.'},
     venues:{tot:'Overall',home:'Home',away:'Away'},
     line:'Line', lineAvg:'League average', lineRel:k=>`Average ${k>0?'+':'−'}${Math.abs(k)}`, games:'Games', period:'Period',
     rangeFrom:'From round', rangeTo:'to', calc:'Apply', last10:'Last 10', fullSeason:'Full season',
@@ -885,7 +885,7 @@ const T = {
     older:'← older', newer:'newer →', chartAria:'Total points in recent games',
     kPos:'Position', kRec:'Record', kPF:'Points for', kPA:'Points against', kAvgSum:'Avg total',
     analyze:'Analyse a game', last20:'Total points – last 20 games', orangeOver:l=>`Orange = Over ${l}`, allMk:'All markets', linesNote:'Lines: league average',
-    freqPct:'Frequency %', trend:'Trend', total:'Overall', drought:'Drought', droughtT:'Consecutive games without the outcome', streakT:'Current streak', maxStreak:'Max streak', maxStreakT:'Longest streak',
+    freqPct:'Frequency %', trend:'Trend', total:'Overall', drought:'Drought', droughtT:'Consecutive games without the outcome', streakT:'Current streak',
     last10g:'Last 10 games', rd:'Rd', opp:'Opponent', res:'Score', resultCol:'Result',
     title:'ParquetStats – Basketball betting statistics',
     players:'Players', player:'Player', allTeams:'All teams', stat:'Stat', avgCol:'Avg',
@@ -1431,7 +1431,7 @@ function viewTeam(L,ti){
     const pc=(S,i)=>S.g?`<td ${heat(S.pct[i])}>${fmt1(S.pct[i])}</td>`:'<td class="muted">–</td>';
     return M(mk).to.map((o,i)=>`<tr>${i===0?`<td class="l" rowspan="${M(mk).to.length}" style="font-weight:700;background:#FFF8EE"><a class="tl" href="#/l/${L.id}/stats/${id}">${M(mk).name}${l!=null?' '+fmtLine(l):''}</a></td>`:''}
       <td class="l">${o}</td>${pc(T_,i)}${pc(Hs,i)}${pc(As,i)}
-      <td>${T_.dr[i]}</td><td>${T_.str[i]}</td><td>${T_.maxS[i]}</td></tr>`).join('');
+      <td>${T_.dr[i]}</td><td>${T_.str[i]}</td></tr>`).join('');
   }).join('');
   const last=gs.slice(-10).reverse().map(({g,H})=>{
     const o=H?g.hp:g.ap, x=H?g.ap:g.hp, w=o>x, opp=H?g.a:g.h, tot=g.hp+g.ap;
@@ -1452,8 +1452,8 @@ function viewTeam(L,ti){
   <section class="card">
     <div class="card-h"><h2 class="sec">${t('allMk')}</h2><span class="muted" style="font-size:13px">${t('linesNote')}</span></div>
     <div class="tw"><table class="st"><thead>
-      <tr class="g"><th colspan="2" class="blank"></th><th colspan="3">${t('freqPct')}</th><th colspan="3">${t('trend')}</th></tr>
-      <tr><th class="l">${t('market')}</th><th class="l">${t('outcome')}</th><th>${t('total')}</th><th>${t('homeC')}</th><th>${t('awayC')}</th><th title="${t('droughtT')}">${t('drought')}</th><th title="${t('streakT')}">${t('streak')}</th><th title="${t('maxStreakT')}">${t('maxStreak')}</th></tr></thead>
+      <tr class="g"><th colspan="2" class="blank"></th><th colspan="3">${t('freqPct')}</th><th colspan="2">${t('trend')}</th></tr>
+      <tr><th class="l">${t('market')}</th><th class="l">${t('outcome')}</th><th>${t('total')}</th><th>${t('homeC')}</th><th>${t('awayC')}</th><th title="${t('droughtT')}">${t('drought')}</th><th title="${t('streakT')}">${t('streak')}</th></tr></thead>
       <tbody>${body}</tbody></table></div>
   </section>
   ${roster.length?`<section class="card">
