@@ -1398,7 +1398,7 @@ function viewAnalysis(L,hs,as){
     ${nH<3||nA<3?`<p class="hint" style="padding:8px 0 0;color:var(--orange-d);font-weight:600">${t('small')(nH,nA)}</p>`:''}<p class="hint" style="padding:8px 0 0">${t('estNote')}</p></div>
   </section>
   <section class="card">
-    <div class="card-h"><h2 class="sec">${t('byMarket')}</h2><span class="muted" style="font-size:13px">${t('star70')}</span></div>
+    <div class="card-h"><h2 class="sec">${t('analysis')}: ${esc(TN(L,h))} vs ${esc(TN(L,a))}</h2><span class="muted" style="font-size:13px">${t('byMarket')} · ${t('star70')}</span></div>
     <div class="tw"><table class="st ana"><thead><tr><th class="l">${t('market')}</th><th class="l">${t('outcome')}</th><th>${esc(TN(L,h))}<br><span style="font-size:11px;opacity:.8">${t('atHome')(nH)}</span></th><th>${esc(TN(L,a))}<br><span style="font-size:11px;opacity:.8">${t('onRoad')(nA)}</span></th><th>${t('avgPct')}</th></tr></thead><tbody>${blocks}</tbody></table></div>
   </section>
   <section class="card">
@@ -1552,10 +1552,11 @@ async function exportTable(sec,tb,btn){
     c.textAlign='right'; c.font='500 24px Barlow, sans-serif'; c.fillStyle='#F2DFBA'; c.fillText('Stagione '+SEASON,W-PAD,75); c.textAlign='left';
     // titolo
     const L=(location.hash.match(/#\/(?:l|t|p)\/([A-Z]+)/)||[])[1]; const lg=L&&LG[L]?ln(LG[L])+' · ':'';
-    let title=(sec.querySelector('h2.sec')?.textContent||'').trim().toUpperCase();
+    let title=(sec.querySelector('h2.sec')?.textContent||'').trim().toUpperCase(); let subExtra='';
+    if(tb.classList.contains('ana')){ const ths=tb.querySelectorAll('thead th'); const nm=i=>ths[i]&&ths[i].firstChild?ths[i].firstChild.textContent.trim():''; subExtra=t('byMarket')+' · '; title=(t('analysis')+': '+nm(2)+' vs '+nm(3)).toUpperCase(); }
     c.fillStyle='#24170F'; let tfs=54; c.font=`700 ${tfs}px "Barlow Condensed", Barlow, sans-serif`; while(c.measureText(title).width>areaW&&tfs>30){ tfs-=2; c.font=`700 ${tfs}px "Barlow Condensed", Barlow, sans-serif`; }
     c.fillText(title,PAD,215);
-    c.font='500 26px Barlow, sans-serif'; c.fillStyle='#7C6650'; const mkOn=document.querySelector('.mk-pills .pill.on'); const vwOn=document.querySelector('.tabs.sm .tab.on'); const lnOn=document.querySelector('.pill.on[data-ui^="k."]'); c.fillText(lg+(mkOn?mkOn.textContent.trim()+' · ':'')+(lnOn?t('line')+' '+lnOn.textContent.trim()+' · ':'')+(vwOn?vwOn.textContent.trim()+' · ':'')+t('imgUpd')(fmtDate(LAST)),PAD,262);
+    c.font='500 26px Barlow, sans-serif'; c.fillStyle='#7C6650'; const mkOn=document.querySelector('.mk-pills .pill.on'); const vwOn=document.querySelector('.tabs.sm .tab.on'); const lnOn=document.querySelector('.pill.on[data-ui^="k."]'); c.fillText(lg+subExtra+(mkOn?mkOn.textContent.trim()+' · ':'')+(lnOn?t('line')+' '+lnOn.textContent.trim()+' · ':'')+(vwOn?vwOn.textContent.trim()+' · ':'')+t('imgUpd')(fmtDate(LAST)),PAD,262);
     // tabella
     let y=300; if(tb.classList.contains('ana')){ y=drawAnaTable(c,tb,cellTxt,{W,H,PAD,areaW,y0:300}); } else {
     const rh=Math.min(66,Math.floor((H-y-170-(grp?58:0)-58)/ (body.length)));
